@@ -44,7 +44,6 @@ classDiagram
     }
     CharacterApp *-- JFrameView
     CharacterApp *-- CharacterController
-    CharacterApp *-- CharacterList
     JFrameView o-- CharacterController: updates
     CharacterController o--o Character: modifies
     Character o-- Filter
@@ -57,7 +56,6 @@ classDiagram
 
     style DataFormatter fill:#23A268
     style CharacterRecord fill:#23A268
-    style CharacterList fill:#23A268
     style DomainXMLWrapper fill:#23A268
     style Formats fill:#23A268
     style NetUtils fill:#23A268
