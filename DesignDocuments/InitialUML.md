@@ -40,20 +40,20 @@ classDiagram
          - cList: CharacterList
     }
     class CharacterRecord{
-        <<internal>>
+        <<INTERNAL>>
     }
     CharacterApp *-- JFrameView
     CharacterApp *-- CharacterController
     CharacterApp *-- CharacterList
     JFrameView o-- CharacterController: updates
-    CharacterController o-- CharacterList: modifies
-    CharacterList o-- Character
-    CharacterList o-- Filter
-    CharacterList o-- DataFormatter
-    CharacterList o-- DomainXMLWrapper
-    CharacterList o-- NetUtils
-    CharacterList o-- Sorter
-    CharacterList o-- Formats
+    CharacterController o-- Character: modifies
+    Character o-- Character
+    Character o-- Filter
+    Character o-- DataFormatter
+    Character o-- DomainXMLWrapper
+    Character o-- NetUtils
+    Character o-- Sorter
+    Character o-- Formats
     
 
     style DataFormatter fill:#23A268
