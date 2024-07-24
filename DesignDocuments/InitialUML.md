@@ -54,9 +54,10 @@ classDiagram
     Character o-- NetUtils
     Character o-- Sorter
     Character o-- Formats
-    
+    ICharacter <|-- CharacterRecord: contains
 
     style DataFormatter fill:#23A268
+    style CharacterRecord fill:#23A268
     style CharacterList fill:#23A268
     style DomainXMLWrapper fill:#23A268
     style Formats fill:#23A268
