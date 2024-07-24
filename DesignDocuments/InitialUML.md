@@ -55,15 +55,15 @@ classDiagram
     CharacterList o-- Formats
     
 
-    style DataFormatter fill:#01FF18
-    style CharacterList fill:#01FF18
-    style DomainXMLWrapper fill:#01FF18
-    style Formats fill:#01FF18
-    style NetUtils fill:#01FF18
-    style Sorter fill:#01FF18
-    style Character fill:#01FF18
-    style Filter fill:#01FF18
-    style ICharacter fill:#01FF18
+    style DataFormatter fill:#23A268
+    style CharacterList fill:#23A268
+    style DomainXMLWrapper fill:#23A268
+    style Formats fill:#23A268
+    style NetUtils fill:#23A268
+    style Sorter fill:#23A268
+    style Character fill:#23A268
+    style Filter fill:#23A268
+    style ICharacter fill:#23A268
     style JFrameView fill: #FF0101
     style CharacterController fill:#0149FF
 
