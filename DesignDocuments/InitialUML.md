@@ -24,6 +24,7 @@ classDiagram
     Character --|> ICharacter: implements
     class ICharacter{
         <<INTERFACE>>
+        CharacterRecord: record
     }
     class DataFormatter{
         
@@ -38,8 +39,8 @@ classDiagram
          - app: CharacterApp
          - cList: CharacterList
     }
-    class CharacterList{
-        
+    class CharacterRecord{
+        <<internal>>
     }
     CharacterApp *-- JFrameView
     CharacterApp *-- CharacterController
