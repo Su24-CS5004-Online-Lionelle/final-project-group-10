@@ -1,20 +1,20 @@
 package student.model.formatters;
 
-import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
-import java.util.Collection;
-import javax.annotation.Nonnull;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import student.model.ICharacter.CharacterRecord;
 
+import javax.annotation.Nonnull;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Collection;
+
 /**
  * A class to format the data into XML, CSV, JSON, or TXT files.
  * This is only used for File Output!
  * Displaying the information in the JFrame will be handled separately in the View class.
- * **/
+ **/
 public final class DataFormatter {
 
     /**
@@ -26,24 +26,23 @@ public final class DataFormatter {
 
     /**
      * Print the characters in a human-readable format.
+     *
      * @param characters the character records to print.
      * @return String the formatted string of the records.
      */
-    public static String txtPrint(Collection<CharacterRecord> characters) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
+    public static void txtPrint(Collection<CharacterRecord> characters, OutputStream out) {
+        PrintStream ps = new PrintStream(out);
         for (CharacterRecord character : characters) {
             txtPrintSingle(character, ps);
             ps.println();
         }
-        return baos.toString();
     }
 
     /**
      * Print a single character record.
      *
      * @param character the character record to print
-     * @param ps the print stream to write to
+     * @param ps        the print stream to write to
      */
     private static void txtPrintSingle(CharacterRecord character, @Nonnull PrintStream ps) {
         ps.println("Name: " + character.name());
@@ -60,17 +59,15 @@ public final class DataFormatter {
      * @param characters the records to write
      * @return a String representation of the csv data
      */
-    public static String writeXmlData(Collection<CharacterRecord> characters) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    public static void writeXmlData(Collection<CharacterRecord> characters, OutputStream out) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             DomainXmlWrapper wrapper = new DomainXmlWrapper(characters);
-            xmlMapper.writeValue(baos, wrapper);
+            xmlMapper.writeValue(out, wrapper);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return baos.toString();
     }
 
     /**
@@ -79,16 +76,14 @@ public final class DataFormatter {
      * @param characters the records to write
      * @return a String representation of the csv data
      */
-    public static String writeJsonData(Collection<CharacterRecord> characters) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    public static void writeJsonData(Collection<CharacterRecord> characters, OutputStream out) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            mapper.writeValue(baos, characters);
+            mapper.writeValue(out, characters);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return baos.toString();
     }
 
     /**
@@ -97,9 +92,7 @@ public final class DataFormatter {
      * @param characters the records to write
      * @return a String representation of the csv data
      */
-    public static String writeCSVData(Collection<CharacterRecord> characters) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream writer = new PrintStream(baos);
+    public static void writeCSVData(Collection<CharacterRecord> characters, OutputStream out) {
         String[] header = {
                 "name",
                 "status",
@@ -108,41 +101,75 @@ public final class DataFormatter {
                 "imageurl",
                 "episodes"
         };
-        writer.println(String.join(",", header));
-        for (CharacterRecord character : characters) {
-            String[] fields = {
-                    character.name(),
-                    character.status(),
-                    character.species(),
-                    character.gender(),
-                    character.image(),
-                    String.join(",", character.episode()),
-            };
-            writer.println(String.join(",", fields));
+        try {
+            out.write(String.join(",", header).getBytes());
+            out.write("\n".getBytes());
+
+            for (CharacterRecord character : characters) {
+                String[] fields = {
+                        character.name(),
+                        character.status(),
+                        character.species(),
+                        character.gender(),
+                        character.image(),
+                        String.join(",", character.episode()),
+                };
+                out.write(String.join(",", fields).getBytes());
+                out.write("\n".getBytes());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return baos.toString();
+
+
+//        String[] header = {"hostname","ip","city","region","country",
+//                "postal","latitude","longitude"};
+//        try{
+//            out.write(String.join(",",header).getBytes());
+//            out.write("\n".getBytes());
+//            for (CharacterRecord character : characters) {
+//                String[] fields = {
+//                        character.name(),
+//                        character.status(),
+//                        character.species(),
+//                        character.gender(),
+//                        character.image(),
+//                        String.join(",", character.episode()),
+//                };
+//                out.write(String.join(",", fields).getBytes());
+//                out.write("\n".getBytes());
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**
      * Write the data in the specified format.
      *
      * @param characters the records to write
-     * @param format the format to write the records in
+     * @param format     the format to write the records in
      * @return the formatted string of the reords
      */
-    public static String write(@Nonnull Collection<CharacterRecord> characters, @Nonnull Formats format) {
+    public static void write(@Nonnull Collection<CharacterRecord> characters, @Nonnull Formats format, OutputStream out) {
         switch (format) {
             case XML:
-                return writeXmlData(characters);
+                writeXmlData(characters, out);
+                break;
             case JSON:
-                return writeJsonData(characters);
+                writeJsonData(characters, out);
+                break;
             case CSV:
-                return writeCSVData(characters);
+                writeCSVData(characters, out);
+                break;
             case TXT:
-                return txtPrint(characters);
+                txtPrint(characters, out);
+                break;
             default:
-                break; // should never reach here
+                throw new IllegalArgumentException("Invalid format"); // should never reach here
         }
-        throw new IllegalArgumentException("Invalid format"); // should never reach here
+
     }
+
+
 }
