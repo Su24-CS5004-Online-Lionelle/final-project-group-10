@@ -57,23 +57,7 @@ public class Character implements ICharacter {
 
             List<CharacterRecord> allRecords = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {});
 
-            Stream<CharacterRecord> filteredStream = allRecords.stream();
-            if (status != null) {
-                filteredStream = new Filter().filterByStatus(filteredStream, status);
-            }
-            if (species != null) {
-                filteredStream = new Filter().filterBySpecies(filteredStream, species);
-            }
-            if (gender != null) {
-                filteredStream = new Filter().filterByGender(filteredStream, gender);
-            }
-            if (episodes != null && !episodes.isEmpty()) {
-                for (String episode : episodes) {
-                    filteredStream = new Filter().filterByEpisode(filteredStream, episode);
-                }
-            }
-
-            characterRecords = new Sorter().sort(filteredStream, ascending).collect(Collectors.toList());
+            characterRecords = new Sorter().sort(allRecords.stream(), ascending).collect(Collectors.toList());
 
         } catch (IOException e) {
             e.printStackTrace();
