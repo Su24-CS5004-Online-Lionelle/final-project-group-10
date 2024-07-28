@@ -28,7 +28,7 @@ public final class DataFormatter {
      * Print the characters in a human-readable format.
      *
      * @param characters the character records to print.
-     * @return String the formatted string of the records.
+     * @param out        the output stream to write to. 
      */
     public static void txtPrint(Collection<CharacterRecord> characters, OutputStream out) {
         PrintStream ps = new PrintStream(out);
@@ -56,8 +56,8 @@ public final class DataFormatter {
     /**
      * Write the data in XML format.
      *
-     * @param characters the records to write
-     * @return a String representation of the csv data
+     * @param characters the records to write.
+     * @param out        the output stream to write to. 
      */
     public static void writeXmlData(Collection<CharacterRecord> characters, OutputStream out) {
         try {
@@ -73,8 +73,8 @@ public final class DataFormatter {
     /**
      * Write the data in JSON format.
      *
-     * @param characters the records to write
-     * @return a String representation of the csv data
+     * @param characters the records to write.
+     * @param out        the output stream to write to. 
      */
     public static void writeJsonData(Collection<CharacterRecord> characters, OutputStream out) {
         ObjectMapper mapper = new ObjectMapper();
@@ -90,7 +90,7 @@ public final class DataFormatter {
      * Write the data in CSV format.
      *
      * @param characters the records to write
-     * @return a String representation of the csv data
+     * @param out        the output stream to write to.
      */
     public static void writeCSVData(Collection<CharacterRecord> characters, OutputStream out) {
         String[] header = {
@@ -120,28 +120,6 @@ public final class DataFormatter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-//        String[] header = {"hostname","ip","city","region","country",
-//                "postal","latitude","longitude"};
-//        try{
-//            out.write(String.join(",",header).getBytes());
-//            out.write("\n".getBytes());
-//            for (CharacterRecord character : characters) {
-//                String[] fields = {
-//                        character.name(),
-//                        character.status(),
-//                        character.species(),
-//                        character.gender(),
-//                        character.image(),
-//                        String.join(",", character.episode()),
-//                };
-//                out.write(String.join(",", fields).getBytes());
-//                out.write("\n".getBytes());
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     /**
@@ -149,7 +127,7 @@ public final class DataFormatter {
      *
      * @param characters the records to write
      * @param format     the format to write the records in
-     * @return the formatted string of the reords
+     * @param out        the output stream to write to. 
      */
     public static void write(@Nonnull Collection<CharacterRecord> characters, @Nonnull Formats format, OutputStream out) {
         switch (format) {
@@ -170,6 +148,4 @@ public final class DataFormatter {
         }
 
     }
-
-
 }
