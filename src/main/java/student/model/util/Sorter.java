@@ -17,10 +17,11 @@ public class Sorter {
      * @return A stream of CharacterRecords sorted in the specified order.
      */
     public Stream<CharacterRecord> sort(Stream<CharacterRecord> characters, boolean ascending) {
+        Comparator<CharacterRecord> comparator = Comparator.comparing(CharacterRecord::name, String.CASE_INSENSITIVE_ORDER);
         if (ascending) {
-            return characters.sorted(Comparator.comparing(CharacterRecord::name));
+            return characters.sorted(comparator);
         } else {
-            return characters.sorted(Comparator.comparing(CharacterRecord::name).reversed());
+            return characters.sorted(comparator.reversed());
         }
     }
 }
