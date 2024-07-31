@@ -34,7 +34,7 @@ public class DataFormatterTest {
         assertTrue(out.toString().contains("Species: Human"));
         assertTrue(out.toString().contains("Gender: Male"));
         assertTrue(out.toString().contains("Image: https://rickandmortyapi.com/api/character/avatar/1.jpeg"));
-        assertTrue(out.toString().contains("https://rickandmortyapi.com/api/episode/1"));
+        assertTrue(out.toString().contains("Episodes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
     }
 
     // also test DomainXmlWrapper
