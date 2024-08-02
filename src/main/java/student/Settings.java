@@ -31,7 +31,7 @@ public class Settings {
         EXPORT = prop.getProperty("export");
         SORT = prop.getProperty("sort");
         FONT = prop.getProperty("font");
-        FONT_SIZE = Integer.parseInt(prop.getProperty("fontSize"));
+        FONT_SIZE = Integer.parseInt(prop.getProperty("font_size"));
         GENDER_OPTION = prop.getProperty("gender_option");
         STATUS_OPTION = prop.getProperty("status_option");
         SPECIES_OPTION = prop.getProperty("species_option");
