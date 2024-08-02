@@ -11,18 +11,20 @@ import java.util.List;
 // feel free to rename
 public class CharacterController {
 
-    private ICharacter character;
+    private ICharacter characters;
 
     /** The format to output. */
     private Formats format = Formats.TXT;
 
     private JFrameView view;
 
-    public CharacterController(JFrameView view) {
-        this.view = view;
+//    public CharacterController(JFrameView view) {
+//        this.view = view;
+//    }
+
+    public CharacterController(ICharacter character) {
+        this.characters = character;
     }
-
-
 
 
 }
