@@ -10,7 +10,6 @@ public class JFrameView extends JFrame{
     private CharacterController controller;
 
     public JFrameView(CharacterController controller){
-        setTitle("CharacterApp");
         this.controller = controller;
 
     }
