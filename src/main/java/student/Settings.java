@@ -1,6 +1,9 @@
 package student;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
+import javax.swing.*;
 
 public class Settings {
     private static Settings instance;
@@ -20,5 +23,41 @@ public class Settings {
 
     private Settings(){
         Properties prop = loadProperties();
+        CAPTION = prop.getProperty("caption");
+        SEARCH = prop.getProperty("search");
+        GENDER = prop.getProperty("gender");
+        STATUS = prop.getProperty("status");
+        SPECIES = prop.getProperty("species");
+        EXPORT = prop.getProperty("export");
+        SORT = prop.getProperty("sort");
+        FONT = prop.getProperty("font");
+        FONT_SIZE = Integer.parseInt(prop.getProperty("fontSize"));
+        GENDER_OPTION = prop.getProperty("gender_option");
+        STATUS_OPTION = prop.getProperty("status_option");
+        SPECIES_OPTION = prop.getProperty("species_option");
+        SORT_OPTION = prop.getProperty("sort_option");
+        setUIManager();
+    }
+
+    private static void setUIManager(){
+        try {
+            UIManager.setLookAndFeel((UIManager.getSystemLookAndFeelClassName()));
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static Properties loadProperties(){
+        Properties prop = new Properties();
+        try {
+            InputStream is = Settings.class.getResourceAsStream("resources/config.xml");
+            prop.loadFromXML(is);
+            is.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return prop;
     }
 }
