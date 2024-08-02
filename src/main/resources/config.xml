@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="caption"></entry>
+    <entry key="font">Old English Text MT</entry>
+    <entry key="font_size"></entry>
+    <entry key="search"></entry>
+    <entry key="gender"></entry>
+    <entry key="status"></entry>
+    <entry key="species"></entry>
+    <entry key="export"></entry>
+    <entry key="sort"></entry>
+    <entry key="gender_option"></entry>
+    <entry key="status_option"></entry>
+    <entry key="species_option"></entry>
+    <entry key="sort_option"></entry>
+</properties>
