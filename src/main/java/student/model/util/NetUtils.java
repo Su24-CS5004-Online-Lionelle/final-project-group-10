@@ -28,8 +28,7 @@ public final class NetUtils {
      * @return string URL containing API response.
      * @throws IOException if search is not successful.
      */
-    public static String getCharacterData(String name, String status, String species, String gender, List<String> episodes) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
+    public static String getCharacterUrl(String name, String status, String species, String gender, List<String> episodes) throws IOException, InterruptedException {
         List<String> queryParams = new ArrayList<>();
 
         if (name != null && !name.isEmpty()) queryParams.add("name=" + URLEncoder.encode(name, StandardCharsets.UTF_8));
@@ -43,10 +42,21 @@ public final class NetUtils {
         }
 
         String queryString = String.join("&", queryParams);
-        String finalUrl = BASE_API_URL + (queryString.isEmpty() ? "" : "?" + queryString);
+        return BASE_API_URL + (queryString.isEmpty() ? "" : "?" + queryString);
+    }
 
+    /**
+     * Get the response body from the API after building the URL.
+     * 
+     * @param url The URL of the next page.
+     * @return The response body.
+     * @throws IOException if search is not successful.
+     * @throws InterruptedException if the thread is interrupted.
+     */
+    public static String getCharacterData(String url) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(finalUrl))
+                .uri(URI.create(url))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

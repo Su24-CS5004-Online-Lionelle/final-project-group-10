@@ -31,6 +31,6 @@ public interface ICharacter {
     @JacksonXmlRootElement(localName = "results")
     @JsonPropertyOrder({"id", "name", "status", "species", "gender", "image", "episode"})
     record CharacterRecord(int id, String name, String status, String species, String gender,
-                           String image, String[] episode) {
+                           String image, List<String> episode) {
     }
 }

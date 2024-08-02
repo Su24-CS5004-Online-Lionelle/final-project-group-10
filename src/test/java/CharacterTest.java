@@ -55,5 +55,14 @@ public class CharacterTest {
             e.printStackTrace();
         }
     }
-}
 
+    @Test
+    public void testLoadCharactersWithMultiplePages() {
+        character.loadCharacters("Rick Sanchez", null, null, null, null, false);
+        List<ICharacter.CharacterRecord> characterRecords = character.getCharacterRecords();
+
+        //view.updateTable(characterRecords)
+
+        System.out.println(1);
+    }
+}
