@@ -1,8 +1,10 @@
 package student;
 
+import java.util.Properties;
+
 public class Settings {
     private static Settings instance;
-    public final int CAPTION;
+    public final String CAPTION;
     public final String SEARCH;
     public final String GENDER;
     public final String STATUS;
@@ -16,5 +18,7 @@ public class Settings {
     public final String SPECIES_OPTION;
     public final String SORT_OPTION;
 
-
+    private Settings(){
+        Properties prop = loadProperties();
+    }
 }
