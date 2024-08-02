@@ -12,7 +12,7 @@ public class Button extends JButton {
     private ButtonType bt;
     public Button(ButtonType buttonType) {
         this.bt = buttonType;
-        addActionListener(new ButtonListener() {})
+        addActionListener(new ButtonListener() {});
     }
 
     private class ButtonListener implements ActionListener {
