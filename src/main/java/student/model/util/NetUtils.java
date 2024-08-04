@@ -28,18 +28,13 @@ public final class NetUtils {
      * @return string URL containing API response.
      * @throws IOException if search is not successful.
      */
-    public static String getCharacterUrl(String name, String status, String species, String gender, List<String> episodes) throws IOException, InterruptedException {
+    public static String getCharacterUrl(String name, String status, String species, String gender) throws IOException, InterruptedException {
         List<String> queryParams = new ArrayList<>();
 
         if (name != null && !name.isEmpty()) queryParams.add("name=" + URLEncoder.encode(name, StandardCharsets.UTF_8));
         if (status != null && !status.isEmpty()) queryParams.add("status=" + URLEncoder.encode(status, StandardCharsets.UTF_8));
         if (species != null && !species.isEmpty()) queryParams.add("species=" + URLEncoder.encode(species, StandardCharsets.UTF_8));
         if (gender != null && !gender.isEmpty()) queryParams.add("gender=" + URLEncoder.encode(gender, StandardCharsets.UTF_8));
-        if (episodes != null && !episodes.isEmpty()) {
-            for (String episode : episodes) {
-                queryParams.add("episode=" + URLEncoder.encode(episode, StandardCharsets.UTF_8));
-            }
-        }
 
         String queryString = String.join("&", queryParams);
         return BASE_API_URL + (queryString.isEmpty() ? "" : "?" + queryString);
