@@ -21,7 +21,7 @@ public class DataFormatterTest {
     @BeforeEach
     public void setUp() {
         Character character = new Character();
-        character.loadCharacters("Rick", "Alive", "Human", "Male", List.of(""), true);
+        character.loadCharacters("Rick", "Alive", "Human", "Male", true);
         mockCharacters = character.getCharacterRecords();
     }
 
@@ -34,7 +34,6 @@ public class DataFormatterTest {
         assertTrue(out.toString().contains("Species: Human"));
         assertTrue(out.toString().contains("Gender: Male"));
         assertTrue(out.toString().contains("Image: https://rickandmortyapi.com/api/character/avatar/1.jpeg"));
-        assertTrue(out.toString().contains("Episodes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
     }
 
     // also test DomainXmlWrapper
@@ -48,7 +47,6 @@ public class DataFormatterTest {
         assertTrue(out.toString().contains("<species>Human</species>"));
         assertTrue(out.toString().contains("<gender>Male</gender>"));
         assertTrue(out.toString().contains("<image>https://rickandmortyapi.com/api/character/avatar/1.jpeg</image>"));
-        assertTrue(out.toString().contains("<episode>https://rickandmortyapi.com/api/episode/1</episode>"));
         assertTrue(out.toString().contains("</domain>"));
     }
 
@@ -61,13 +59,12 @@ public class DataFormatterTest {
         assertTrue(out.toString().contains("\"species\" : \"Human\""));
         assertTrue(out.toString().contains("\"gender\" : \"Male\""));
         assertTrue(out.toString().contains("\"image\" : \"https://rickandmortyapi.com/api/character/avatar/1.jpeg\""));
-        assertTrue(out.toString().contains("\"episode\" : [ \"https://rickandmortyapi.com/api/episode/1\","));
     }
 
     @Test
     public void testWriteCSVData() {
         OutputStream out = new ByteArrayOutputStream();
         DataFormatter.writeCSVData(mockCharacters, out);
-        assertTrue(out.toString().contains("Rick Sanchez,Alive,Human,Male,https://rickandmortyapi.com/api/character/avatar/1.jpeg,https://rickandmortyapi.com/api/episode/1"));
+        assertTrue(out.toString().contains("Rick Sanchez,Alive,Human,Male,https://rickandmortyapi.com/api/character/avatar/1.jpeg"));
     }
 }

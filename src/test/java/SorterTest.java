@@ -15,9 +15,9 @@ public class SorterTest {
     public void testSortAscending() {
         Sorter sorter = new Sorter();
         List<CharacterRecord> characters = Arrays.asList(
-            new CharacterRecord(1, "Rick", "Alive", "Human", "Male", "url1", Arrays.asList("1", "2")),
-            new CharacterRecord(2, "Morty", "Alive", "Human", "Male", "url2", Arrays.asList("1", "3")),
-            new CharacterRecord(3, "Beth", "Alive", "Human", "Female", "url3", Arrays.asList("2", "4"))
+            new CharacterRecord(1, "Rick", "Alive", "Human", "Male", "url1"),
+            new CharacterRecord(2, "Morty", "Alive", "Human", "Male", "url2"),
+            new CharacterRecord(3, "Beth", "Alive", "Human", "Female", "url3")
         );
 
         List<CharacterRecord> sorted = sorter.sort(characters.stream(), true).collect(Collectors.toList());
@@ -31,9 +31,9 @@ public class SorterTest {
     public void testSortDescending() {
         Sorter sorter = new Sorter();
         List<CharacterRecord> characters = Arrays.asList(
-            new CharacterRecord(1, "Rick", "Alive", "Human", "Male", "url1", Arrays.asList("1", "2")),
-            new CharacterRecord(2, "Morty", "Alive", "Human", "Male", "url2", Arrays.asList("1", "3")),
-            new CharacterRecord(3, "Beth", "Alive", "Human", "Female", "url3", Arrays.asList("2", "4"))
+            new CharacterRecord(1, "Rick", "Alive", "Human", "Male", "url1"),
+            new CharacterRecord(2, "Morty", "Alive", "Human", "Male", "url2"),
+            new CharacterRecord(3, "Beth", "Alive", "Human", "Female", "url3")
         );
 
         List<CharacterRecord> sorted = sorter.sort(characters.stream(), false).collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class SorterTest {
     @Test
     public void testSortWithSingleElement() {
         Sorter sorter = new Sorter();
-        CharacterRecord singleCharacter = new CharacterRecord(1, "Jerry", "Alive", "Human", "Male", "url4", Arrays.asList("1", "2"));
+        CharacterRecord singleCharacter = new CharacterRecord(1, "Jerry", "Alive", "Human", "Male", "url4");
         List<CharacterRecord> singleList = Collections.singletonList(singleCharacter);
         List<CharacterRecord> sorted = sorter.sort(singleList.stream(), true).collect(Collectors.toList());
         assertEquals(1, sorted.size());
@@ -65,8 +65,8 @@ public class SorterTest {
     public void testSortStability() {
         Sorter sorter = new Sorter();
         List<CharacterRecord> characters = Arrays.asList(
-            new CharacterRecord(1, "Summer", "Alive", "Human", "Female", "url6", Arrays.asList("6", "7")),
-            new CharacterRecord(2, "Summer", "Alive", "Human", "Female", "url7", List.of("8"))
+            new CharacterRecord(1, "Summer", "Alive", "Human", "Female", "url6"),
+            new CharacterRecord(2, "Summer", "Alive", "Human", "Female", "url7")
         );
         List<CharacterRecord> sorted = sorter.sort(characters.stream(), true).collect(Collectors.toList());
         assertTrue(sorted.get(0).image().equals("url6") && sorted.get(1).image().equals("url7"), "Sort should maintain original order of elements with the same name");

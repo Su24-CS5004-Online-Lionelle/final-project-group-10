@@ -21,7 +21,7 @@ public class CharacterTest {
 
     @Test
     public void testLoadCharactersBasicInfo() {
-        character.loadCharacters("111", "Alive", "Human", "Male", null, false);
+        character.loadCharacters("111", "Alive", "Human", "Male", false);
         List<ICharacter.CharacterRecord> characterRecords = character.getCharacterRecords();
 
         //view.updateTable(characterRecords)
@@ -31,7 +31,7 @@ public class CharacterTest {
     @Test
     public void testLoadCharactersWithEpisodeFilter() {
 //        character.loadCharacters("Rick Sanchez", null, null, null, null);
-        character.loadCharacters("Rick Sanchez", null, null, null, Collections.singletonList("10"), false);
+        character.loadCharacters("Rick Sanchez", null, null, null, false);
         List<ICharacter.CharacterRecord> characterRecords = character.getCharacterRecords();
 
         //view.updateTable(characterRecords)
@@ -42,7 +42,7 @@ public class CharacterTest {
     @Test
     public void testWriteCharacterDataToFile() {
         try {
-            character.loadCharacters("Rick Sanchez", null, null, null, Collections.singletonList("10"), false);
+            character.loadCharacters("Rick Sanchez", null, null, null, false);
             List<ICharacter.CharacterRecord> characterRecords = character.getCharacterRecords();
 
             Formats format = Formats.TXT;
@@ -58,7 +58,7 @@ public class CharacterTest {
 
     @Test
     public void testLoadCharactersWithMultiplePages() {
-        character.loadCharacters("Rick Sanchez", null, null, null, null, false);
+        character.loadCharacters("Rick Sanchez", null, null, null, false);
         List<ICharacter.CharacterRecord> characterRecords = character.getCharacterRecords();
 
         //view.updateTable(characterRecords)
