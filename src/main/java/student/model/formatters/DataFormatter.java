@@ -53,16 +53,6 @@ public final class DataFormatter {
         ps.println("Species: " + character.species());
         ps.println("Gender: " + character.gender());
         ps.println("Image: " + character.image());
-
-        Pattern pattern = Pattern.compile(".*/(\\d+)$");
-        String episodes = character.episode().stream()
-                .map((String url) -> {
-                    Matcher matcher = pattern.matcher(url);
-                    return matcher.find() ? matcher.group(1) : url;
-                })
-                .collect(Collectors.joining(", "));
-
-        ps.println("Episodes: " + episodes);
     }
 
     /**
@@ -111,7 +101,6 @@ public final class DataFormatter {
                 "species",
                 "gender",
                 "imageurl",
-                "episodes"
         };
         try {
             out.write(String.join(",", header).getBytes());
@@ -124,7 +113,6 @@ public final class DataFormatter {
                         character.species(),
                         character.gender(),
                         character.image(),
-                        String.join(",", character.episode()),
                 };
                 out.write(String.join(",", fields).getBytes());
                 out.write("\n".getBytes());
