@@ -26,5 +26,17 @@ public class CharacterController {
         this.characters = character;
     }
 
+    public void writeCharacters(List<ICharacter.CharacterRecord> characters, int format_choice, OutputStream output) {
+        Formats format = Formats.values()[format_choice];
+        DataFormatter.write(characters, format, output);
+    }
+
+    public void loadCharacters(String name, String status, String species, String gender, boolean ascending) {
+        characters.loadCharacters(name, status, species, gender, ascending);
+    }
+
+    public List<ICharacter.CharacterRecord> getCharacterRecords() {
+        return characters.getCharacterRecords();
+    }
 
 }
