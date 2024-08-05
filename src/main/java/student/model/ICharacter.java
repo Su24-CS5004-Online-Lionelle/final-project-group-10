@@ -12,7 +12,9 @@ import java.util.List;
 
 public interface ICharacter {
 
-    void loadCharacters(String name, String status, String species, String gender, List<String> episodes, boolean ascending);
+    void loadCharacters(String name, String status, String species, String gender, boolean ascending);
+
+    List<CharacterRecord> getCharacterRecords();
 
     /**
      * Character record to pass around between objects.
@@ -25,12 +27,11 @@ public interface ICharacter {
      * @param species The character's species.
      * @param gender  The character's gender.
      * @param image   The character's image URL.
-     * @param episode The character's episode URLs.
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JacksonXmlRootElement(localName = "results")
-    @JsonPropertyOrder({"id", "name", "status", "species", "gender", "image", "episode"})
+    @JsonPropertyOrder({"id", "name", "status", "species", "gender", "image"})
     record CharacterRecord(int id, String name, String status, String species, String gender,
-                           String image, List<String> episode) {
+                           String image) {
     }
 }
