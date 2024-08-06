@@ -33,7 +33,6 @@ public class DataFormatterTest {
         assertTrue(out.toString().contains("Status: Alive"));
         assertTrue(out.toString().contains("Species: Human"));
         assertTrue(out.toString().contains("Gender: Male"));
-        assertTrue(out.toString().contains("Image: https://rickandmortyapi.com/api/character/avatar/1.jpeg"));
     }
 
     // also test DomainXmlWrapper

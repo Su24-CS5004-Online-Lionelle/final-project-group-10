@@ -6,7 +6,8 @@ import java.util.Properties;
 import javax.swing.*;
 
 public class Settings {
-    private static Settings instance;
+    private static Settings instance = new Settings();
+    private final Properties prop;
     public final String CAPTION;
     public final String SEARCH;
     public final String GENDER;
@@ -22,7 +23,8 @@ public class Settings {
     public final String SORT_OPTION;
 
     private Settings(){
-        Properties prop = loadProperties();
+        prop = new Properties();
+        loadProperties();
         CAPTION = prop.getProperty("caption");
         SEARCH = prop.getProperty("search");
         GENDER = prop.getProperty("gender");
@@ -48,17 +50,18 @@ public class Settings {
         }
     }
 
-    private static Properties loadProperties(){
-        Properties prop = new Properties();
+    private void loadProperties(){
         try {
-            InputStream is = Settings.class.getResourceAsStream("resources/config.xml");
+            InputStream is = Settings.class.getResourceAsStream("/config.xml");
+            if (is == null){
+                throw new IOException("Cannot find the file");
+            }
             prop.loadFromXML(is);
             is.close();
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        return prop;
     }
 
     public static Settings getInstance(){

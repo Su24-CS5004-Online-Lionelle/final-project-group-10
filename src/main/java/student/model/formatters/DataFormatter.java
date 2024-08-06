@@ -47,12 +47,11 @@ public final class DataFormatter {
      * @param character the character record to print
      * @param ps        the print stream to write to
      */
-    private static void txtPrintSingle(CharacterRecord character, @Nonnull PrintStream ps) {
+    public static void txtPrintSingle(CharacterRecord character, @Nonnull PrintStream ps) {
         ps.println("Name: " + character.name());
         ps.println("Status: " + character.status());
         ps.println("Species: " + character.species());
         ps.println("Gender: " + character.gender());
-        ps.println("Image: " + character.image());
     }
 
     /**

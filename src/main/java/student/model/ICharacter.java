@@ -4,13 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import java.util.List;
+
 /**
  * Interface to the model.
  **/
 
 public interface ICharacter {
 
-    void loadCharacters(String name, String status, String species, String gender, boolean ascending);
+    List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending);
+
+    List<CharacterRecord> getCharacterRecords();
 
     /**
      * Character record to pass around between objects.

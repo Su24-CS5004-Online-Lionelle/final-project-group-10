@@ -14,7 +14,7 @@ public class CharacterApp {
     public static void main(String[] args) {
         ICharacter model = new Character();
         CharacterController controller = new CharacterController(model);
-        JFrameView view = new JFrameView(controller);
+        JFrameView view = JFrameView.getInstance(controller);
         view.start();
     }
 }

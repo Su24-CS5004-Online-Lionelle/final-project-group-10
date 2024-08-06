@@ -15,13 +15,13 @@ public class Menu extends JFrame implements ItemListener {
     private String selected_gender = "All";
     private String selected_status = "All";
     private String selected_species = "All";
-    private String selected_sort = "All";
+    private String selected_sort = "Ascending";
 
     public Menu() {
         String[] genders = SETTINGS.GENDER_OPTION.split(",");
         String[] statuses = SETTINGS.STATUS_OPTION.split(",");
         String[] species = SETTINGS.SPECIES_OPTION.split(",");
-        String[] sorts = SETTINGS.SORT.split(",");
+        String[] sorts = SETTINGS.SORT_OPTION.split(",");
 
         gender_box = new JComboBox<>(genders);
         status_box = new JComboBox<>(statuses);
@@ -73,22 +73,5 @@ public class Menu extends JFrame implements ItemListener {
     public JComboBox<String> getSortBox() {
         return sort_box;
     }
-
-    public String GETGENDER() {
-        return selected_gender;
-    }
-
-    public String GETSTATUS() {
-        return selected_status;
-    }
-
-    public String GETSPECIES() {
-        return selected_species;
-    }
-
-    public String GETSORT() {
-        return selected_sort;
-    }
-
-
+    
 }
