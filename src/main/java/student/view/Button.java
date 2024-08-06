@@ -4,6 +4,7 @@ import student.controller.CharacterController;
 import student.model.ICharacter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -71,26 +72,35 @@ public class Button extends JButton {
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setDialogTitle("Save File");
 
-                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".xml", "xml"));
-                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".json", "json"));
-                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".csv", "csv"));
+                    FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("*.xml", "xml");
+                    FileNameExtensionFilter jsonFilter = new FileNameExtensionFilter("*.json", "json");
+                    FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("*.csv", "csv");
+
+                    fileChooser.addChoosableFileFilter(xmlFilter);
+                    fileChooser.addChoosableFileFilter(jsonFilter);
+                    fileChooser.addChoosableFileFilter(csvFilter);
                     fileChooser.setAcceptAllFileFilterUsed(false);
 
                     int userSelection = fileChooser.showSaveDialog(null);
 
                     if (userSelection == JFileChooser.APPROVE_OPTION) {
                         File fileToSave = fileChooser.getSelectedFile();
-                        String selectedFormat = fileChooser.getFileFilter().getDescription();
-                        int formatChoice = 0; // Default to XML
+                        String extension = "";
 
-                        if (selectedFormat.contains("JSON")) {
-                            formatChoice = 1;
-                        } else if (selectedFormat.contains("CSV")) {
-                            formatChoice = 2;
+                        if (fileChooser.getFileFilter() == jsonFilter) {
+                            extension = "json";
+                        } else if (fileChooser.getFileFilter() == csvFilter) {
+                            extension = "csv";
+                        } else {
+                            extension = "xml";
+                        }
+
+                        if (!fileToSave.getName().endsWith("." + extension)) {
+                            fileToSave = new File(fileToSave.getAbsolutePath() + "." + extension);
                         }
 
                         try (OutputStream out = new FileOutputStream(fileToSave)) {
-                            controller.writeCharacters(controller.getCharacterRecords(), formatChoice, out);
+                            controller.writeCharacters(controller.getCharacterRecords(), extension, out);
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }

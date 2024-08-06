@@ -29,13 +29,26 @@ public class CharacterController {
             throw new IllegalArgumentException("Character model is not initialized");
         }
         this.character = character;
-//        this.view = JFrameView.getInstance(this);
     }
 
-    public void writeCharacters(List<ICharacter.CharacterRecord> characters, int format_choice, OutputStream output) {
-        Formats format = Formats.values()[format_choice];
-        DataFormatter.write(characters, format, output);
+
+    public void writeCharacters(List<ICharacter.CharacterRecord> characters, String fileExtension, OutputStream out) {
+        Formats format;
+        switch (fileExtension) {
+            case "json":
+                format = Formats.JSON;
+                break;
+            case "csv":
+                format = Formats.CSV;
+                break;
+            case "xml":
+            default:
+                format = Formats.XML;
+                break;
+        }
+        DataFormatter.write(characters, format, out);
     }
+
 
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
