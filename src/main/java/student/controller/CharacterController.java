@@ -6,6 +6,7 @@ import student.model.formatters.DataFormatter;
 import student.model.formatters.Formats;
 import student.view.JFrameView;
 
+import java.io.OutputStream;
 import java.util.List;
 
 // feel free to rename
