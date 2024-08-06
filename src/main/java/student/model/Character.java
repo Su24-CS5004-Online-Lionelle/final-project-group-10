@@ -69,8 +69,6 @@ public class Character implements ICharacter {
             }
 
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
-            // debugging remove later
-            System.out.println("Character records: " + characterRecords);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
