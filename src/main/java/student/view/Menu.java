@@ -32,17 +32,6 @@ public class Menu extends JFrame implements ItemListener {
         status_box.addItemListener(this);
         species_box.addItemListener(this);
         sort_box.addItemListener(this);
-
-        add(new JLabel(SETTINGS.GENDER));
-        add(gender_box);
-        add(new JLabel(SETTINGS.STATUS));
-        add(status_box);
-        add(new JLabel(SETTINGS.SPECIES));
-        add(species_box);
-        add(new JLabel(SETTINGS.SORT));
-        add(sort_box);
-
-
     }
 
 
@@ -69,6 +58,22 @@ public class Menu extends JFrame implements ItemListener {
         }
     }
 
+    public JComboBox<String> getGenderBox() {
+        return gender_box;
+    }
+
+    public JComboBox<String> getStatusBox() {
+        return status_box;
+    }
+
+    public JComboBox<String> getSpeciesBox() {
+        return species_box;
+    }
+
+    public JComboBox<String> getSortBox() {
+        return sort_box;
+    }
+
     public String GETGENDER() {
         return selected_gender;
     }
@@ -84,4 +89,6 @@ public class Menu extends JFrame implements ItemListener {
     public String GETSORT() {
         return selected_sort;
     }
+
+
 }

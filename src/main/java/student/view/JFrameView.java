@@ -52,6 +52,10 @@ public class JFrameView extends JFrame implements IView {
         add(search_button);
         add(export_button);
         add(display_area);
+        add(menu.getGenderBox());
+        add(menu.getSpeciesBox());
+        add(menu.getSortBox());
+        add(menu.getStatusBox());
     }
 
     /** Starts the JFrameView. */
