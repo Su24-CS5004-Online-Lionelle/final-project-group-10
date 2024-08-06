@@ -6,23 +6,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import student.model.util.NetUtils;
 import student.model.util.Sorter;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.net.URL;
 
 public class Character implements ICharacter {
 
     /**
      * The list of character records.
      **/
-    private List<CharacterRecord> characterRecords;
+    private List<CharacterRecord> characterRecords = new ArrayList<>();
 
     public Character() {
         // empty for now
     }
 
+    @Override
     public List<CharacterRecord> getCharacterRecords() {
         return characterRecords;
     }
@@ -43,7 +47,7 @@ public class Character implements ICharacter {
      * @param ascending true if the records should be sorted in ascending order, false otherwise.
      */
     @Override
-    public void loadCharacters(String name, String status, String species, String gender, boolean ascending) {
+    public List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         try {
             List<CharacterRecord> characters = new ArrayList<>();
             String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
@@ -65,11 +69,24 @@ public class Character implements ICharacter {
             }
 
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
-        } catch (IOException e) {
+            // debugging remove later
+            System.out.println("Character records: " + characterRecords);
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
+        return characterRecords;
+    }
 
+    public ImageIcon getImageIcon(CharacterRecord characterRecord) {
+        try {
+            URL url = new URL(characterRecord.image());
+            ImageIcon originalIcon = new ImageIcon(url);
+            Image originalImage = originalIcon.getImage();
+            Image resizedImage = originalImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            return new ImageIcon(resizedImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

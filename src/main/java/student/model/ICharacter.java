@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ICharacter {
 
-    void loadCharacters(String name, String status, String species, String gender, boolean ascending);
+    List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending);
 
     List<CharacterRecord> getCharacterRecords();
 
