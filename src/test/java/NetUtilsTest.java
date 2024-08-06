@@ -16,11 +16,10 @@ public class NetUtilsTest {
             String status = "Alive";
             String species = "Human";
             String gender = "Male";
-            List<String> episodes = Arrays.asList("1");
 
-            String result = NetUtils.getCharacterUrl(name, status, species, gender, episodes);
+            String result = NetUtils.getCharacterUrl(name, status, species, gender);
             assertNotNull(result);
-            assertEquals("https://rickandmortyapi.com/api/character/?name=Rick+Sanchez&status=Alive&species=Human&gender=Male&episode=1", result);
+            assertEquals("https://rickandmortyapi.com/api/character/?name=Rick+Sanchez&status=Alive&species=Human&gender=Male", result);
 
             System.out.println("API Response: " + result);
         } catch (IOException | InterruptedException e) {
@@ -31,9 +30,9 @@ public class NetUtilsTest {
     @Test
     public void testGetCharacterUrlWithNullName() {
         try {
-            String result = NetUtils.getCharacterUrl(null, "Alive", "Human", "Male", Arrays.asList("1"));
+            String result = NetUtils.getCharacterUrl(null, "Alive", "Human", "Male");
             assertNotNull(result);
-            assertEquals("https://rickandmortyapi.com/api/character/?status=Alive&species=Human&gender=Male&episode=1", result);
+            assertEquals("https://rickandmortyapi.com/api/character/?status=Alive&species=Human&gender=Male", result);
         } catch (Exception e) {
             fail("Should handle null name gracefully.");
         }
@@ -42,8 +41,8 @@ public class NetUtilsTest {
     @Test
     public void testGetCharacterUrlWithInvalidName() {
         try {
-            String result = NetUtils.getCharacterUrl("InvalidName", "Alive", "Human", "Male", Arrays.asList("1"));
-            assertEquals("https://rickandmortyapi.com/api/character/?name=InvalidName&status=Alive&species=Human&gender=Male&episode=1", result);
+            String result = NetUtils.getCharacterUrl("InvalidName", "Alive", "Human", "Male");
+            assertEquals("https://rickandmortyapi.com/api/character/?name=InvalidName&status=Alive&species=Human&gender=Male", result);
         } catch (IOException | InterruptedException e) {
             fail("Exception should not be thrown for invalid names.");
         }
@@ -53,7 +52,7 @@ public class NetUtilsTest {
     public void testGetCharacterUrlPerformance() {
         long startTime = System.currentTimeMillis();
         try {
-            NetUtils.getCharacterUrl("Rick", "Alive", "Human", "Male", Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+            NetUtils.getCharacterUrl("Rick", "Alive", "Human", "Male");
         } catch (Exception e) {
             fail("Exception should not be thrown during performance test.");
         }
@@ -64,7 +63,7 @@ public class NetUtilsTest {
     @Test
     public void testGetCharacterData() {
         try {
-            String url = NetUtils.getCharacterUrl("Rick Sanchez", "Alive", "Human", "Male", Arrays.asList("1"));
+            String url = NetUtils.getCharacterUrl("Rick Sanchez", "Alive", "Human", "Male");
             String result = NetUtils.getCharacterData(url);
             assertNotNull(result);
             assertTrue(result.contains("Rick Sanchez"));

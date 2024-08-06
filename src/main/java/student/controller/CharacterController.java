@@ -1,6 +1,5 @@
 package student.controller;
 
-import student.model.Character;
 import student.model.ICharacter;
 import student.model.formatters.DataFormatter;
 import student.model.formatters.Formats;
@@ -39,5 +38,4 @@ public class CharacterController {
     public List<ICharacter.CharacterRecord> getCharacterRecords() {
         return characters.getCharacterRecords();
     }
-
 }

@@ -8,7 +8,6 @@ import student.model.util.Sorter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -41,36 +40,13 @@ public class Character implements ICharacter {
      * @param status   the status of the character
      * @param species  the species of the character
      * @param gender   the gender of the character
-     * @param episodes the episode(s) the character is in
      * @param ascending true if the records should be sorted in ascending order, false otherwise.
      */
-//    @Override
-//    public void loadCharacters(String name, String status, String species, String gender, List<String> episodes, boolean ascending) {
-//        try {
-//            String response = NetUtils.getCharacterData(name, status, species, gender, episodes);
-//            ObjectMapper mapper = new ObjectMapper();
-//            JsonNode rootNode = mapper.readTree(response);
-//            JsonNode infoNode = rootNode.path("results");
-//            if (Objects.isNull(infoNode) || infoNode.isEmpty()) {
-//                characterRecords = Collections.emptyList();
-//                return;
-//            }
-//
-//            List<CharacterRecord> allRecords = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {});
-//
-//            characterRecords = new Sorter().sort(allRecords.stream(), ascending).collect(Collectors.toList());
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
     @Override
-    public void loadCharacters(String name, String status, String species, String gender, List<String> episodes, boolean ascending) {
+    public void loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         try {
             List<CharacterRecord> characters = new ArrayList<>();
-            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender, episodes);
+            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
 
             while (nextUrl != null) {
                 String response = NetUtils.getCharacterData(nextUrl);
