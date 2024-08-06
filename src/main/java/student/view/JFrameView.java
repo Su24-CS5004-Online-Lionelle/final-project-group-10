@@ -52,9 +52,13 @@ public class JFrameView extends JFrame implements IView {
         add(search_button);
         add(export_button);
         add(display_area);
+        add(new JLabel(SETTINGS.GENDER));
         add(menu.getGenderBox());
+        add(new JLabel(SETTINGS.STATUS));
         add(menu.getSpeciesBox());
+        add(new JLabel(SETTINGS.SPECIES));
         add(menu.getSortBox());
+        add(new JLabel(SETTINGS.SORT));
         add(menu.getStatusBox());
     }
 
