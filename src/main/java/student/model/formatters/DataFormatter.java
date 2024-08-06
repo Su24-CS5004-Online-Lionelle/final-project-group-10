@@ -52,7 +52,6 @@ public final class DataFormatter {
         ps.println("Status: " + character.status());
         ps.println("Species: " + character.species());
         ps.println("Gender: " + character.gender());
-        ps.println("Image: " + character.image());
     }
 
     /**
