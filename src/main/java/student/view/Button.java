@@ -1,6 +1,7 @@
 package student.view;
 
 import student.controller.CharacterController;
+import student.model.ICharacter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 /** Button class for the view of the program. */
 public class Button extends JButton {
@@ -28,20 +30,20 @@ public class Button extends JButton {
     /** Text field for search. */
     private final JTextField search_field;
     /** Dropdown for gender. */
-    private final String gender_field;
-    private final String status_field;
-    private final String species_field;
-    private final String sort_field;
+    private final JComboBox<String> gender_box;
+    private final JComboBox<String> status_box;
+    private final JComboBox<String> species_box;
+    private final JComboBox<String> sort_box;
 
     public Button(ButtonType buttonType, CharacterController controller, JTextField search_field,
-                  String gender_field, String status_field, String species_field, String sort_field) {
+                  JComboBox<String> gender_box, JComboBox<String> status_box, JComboBox<String> species_box, JComboBox<String> sort_box) {
         this.bt = buttonType;
         this.controller = controller;
         this.search_field = search_field;
-        this.gender_field = gender_field;
-        this.status_field = status_field;
-        this.species_field = species_field;
-        this.sort_field = sort_field;
+        this.gender_box = gender_box;
+        this.status_box = status_box;
+        this.species_box = species_box;
+        this.sort_box = sort_box;
         addActionListener(new ButtonListener());
     }
 
@@ -50,10 +52,10 @@ public class Button extends JButton {
             switch (bt) {
                 case SEARCH:
                     String name = search_field.getText();
-                    String gender = gender_field;
-                    String status = status_field;
-                    String species = species_field;
-                    String sort = sort_field;
+                    String gender = (String) gender_box.getSelectedItem();
+                    String status = (String) status_box.getSelectedItem();
+                    String species = (String) species_box.getSelectedItem();
+                    String sort = (String) sort_box.getSelectedItem();
 
                     if ("all".equalsIgnoreCase(gender)) gender = "";
                     if ("all".equalsIgnoreCase(status)) status = "";
@@ -61,34 +63,30 @@ public class Button extends JButton {
 
                     boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
 
-                    controller.loadCharacters(name, status, species, gender, ascending);
+                    List<ICharacter.CharacterRecord> characters = controller.loadCharacters(name, status, species, gender, ascending);
+                    JFrameView.getInstance(controller).displayResults(characters);
                     break;
 
                 case EXPORT:
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setDialogTitle("Save File");
 
-                    // Add dropdown for file format
-                    JComboBox<String> formatDropdown = new JComboBox<>(new String[]{"XML", "JSON", "CSV"});
-                    JPanel accessoryPanel = new JPanel();
-                    accessoryPanel.add(new JLabel("Format:"));
-                    accessoryPanel.add(formatDropdown);
-                    fileChooser.setAccessory(accessoryPanel);
+                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".xml", "xml"));
+                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".json", "json"));
+                    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(".csv", "csv"));
+                    fileChooser.setAcceptAllFileFilterUsed(false);
 
                     int userSelection = fileChooser.showSaveDialog(null);
 
                     if (userSelection == JFileChooser.APPROVE_OPTION) {
                         File fileToSave = fileChooser.getSelectedFile();
-                        String selectedFormat = formatDropdown.getSelectedItem().toString();
+                        String selectedFormat = fileChooser.getFileFilter().getDescription();
                         int formatChoice = 0; // Default to XML
 
-                        switch (selectedFormat) {
-                            case "JSON":
-                                formatChoice = 1;
-                                break;
-                            case "CSV":
-                                formatChoice = 2;
-                                break;
+                        if (selectedFormat.contains("JSON")) {
+                            formatChoice = 1;
+                        } else if (selectedFormat.contains("CSV")) {
+                            formatChoice = 2;
                         }
 
                         try (OutputStream out = new FileOutputStream(fileToSave)) {
