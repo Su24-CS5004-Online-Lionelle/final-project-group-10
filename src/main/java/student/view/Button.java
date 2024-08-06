@@ -28,13 +28,13 @@ public class Button extends JButton {
     /** Text field for search. */
     private final JTextField search_field;
     /** Dropdown for gender. */
-    private final JComboBox<String> gender_field;
-    private final JComboBox<String> status_field;
-    private final JComboBox<String> species_field;
-    private final JComboBox<String> sort_field;
+    private final String gender_field;
+    private final String status_field;
+    private final String species_field;
+    private final String sort_field;
 
     public Button(ButtonType buttonType, CharacterController controller, JTextField search_field,
-                  JComboBox<String> gender_field, JComboBox<String> status_field, JComboBox<String> species_field, JComboBox<String> sort_field) {
+                  String gender_field, String status_field, String species_field, String sort_field) {
         this.bt = buttonType;
         this.controller = controller;
         this.search_field = search_field;
@@ -50,10 +50,10 @@ public class Button extends JButton {
             switch (bt) {
                 case SEARCH:
                     String name = search_field.getText();
-                    String gender = gender_field.getSelectedItem().toString();
-                    String status = status_field.getSelectedItem().toString();
-                    String species = species_field.getSelectedItem().toString();
-                    String sort = sort_field.getSelectedItem().toString();
+                    String gender = gender_field;
+                    String status = status_field;
+                    String species = species_field;
+                    String sort = sort_field;
 
                     if ("all".equalsIgnoreCase(gender)) gender = "";
                     if ("all".equalsIgnoreCase(status)) status = "";

@@ -39,11 +39,11 @@ public class JFrameView extends JFrame implements IView {
 
         /** placeholder name for menu dropdowns*/
         search_button = new Button(Button.ButtonType.SEARCH, controller, search_field,
-                menu.GETGENDER(), menu.GETSTATUS, menu.GETSPECIES, menu.GETSORT());
+                menu.GETGENDER(), menu.GETSTATUS(), menu.GETSPECIES(), menu.GETSORT());
 
         /** placeholder name for menu dropdowns*/
         export_button = new Button(Button.ButtonType.EXPORT, controller, search_field,
-                menu.GETGENDER(), menu.GETSTATUS, menu.GETSPECIES, menu.GETSORT());
+                menu.GETGENDER(), menu.GETSTATUS(), menu.GETSPECIES(), menu.GETSORT());
     }
 
     private void addComponents() {
