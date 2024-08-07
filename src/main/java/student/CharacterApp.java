@@ -12,7 +12,9 @@ import student.view.JFrameView;
  */
 public final class CharacterApp {
 
-    /** Private constructor to prevent instantiation. */
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private CharacterApp() {
         //empty
     }

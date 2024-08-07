@@ -11,8 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class NetUtils {
+    /**
+     * Base URL to build on for sending requests to API.
+     */
     private static final String BASE_API_URL = "https://rickandmortyapi.com/api/character/";
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private NetUtils() {
         // This class should not be instantiated
     }
@@ -26,14 +32,24 @@ public final class NetUtils {
      * @param gender The character's gender.
      * @return string URL containing API response.
      * @throws IOException if search is not successful.
+     * @throws InterruptedException if thread is interrupted. 
      */
-    public static String getCharacterUrl(String name, String status, String species, String gender) throws IOException, InterruptedException {
+    public static String getCharacterUrl(String name, String status, String species, String gender)
+                                                            throws IOException, InterruptedException {
         List<String> queryParams = new ArrayList<>();
 
-        if (name != null && !name.isEmpty()) queryParams.add("name=" + URLEncoder.encode(name, StandardCharsets.UTF_8));
-        if (status != null && !status.isEmpty()) queryParams.add("status=" + URLEncoder.encode(status, StandardCharsets.UTF_8));
-        if (species != null && !species.isEmpty()) queryParams.add("species=" + URLEncoder.encode(species, StandardCharsets.UTF_8));
-        if (gender != null && !gender.isEmpty()) queryParams.add("gender=" + URLEncoder.encode(gender, StandardCharsets.UTF_8));
+        if (name != null && !name.isEmpty()) {
+            queryParams.add("name=" + URLEncoder.encode(name, StandardCharsets.UTF_8));
+        }
+        if (status != null && !status.isEmpty()) {
+            queryParams.add("status=" + URLEncoder.encode(status, StandardCharsets.UTF_8));
+        }
+        if (species != null && !species.isEmpty()) {
+            queryParams.add("species=" + URLEncoder.encode(species, StandardCharsets.UTF_8));
+        }
+        if (gender != null && !gender.isEmpty()) {
+            queryParams.add("gender=" + URLEncoder.encode(gender, StandardCharsets.UTF_8));
+        }
 
         String queryString = String.join("&", queryParams);
         return BASE_API_URL + (queryString.isEmpty() ? "" : "?" + queryString);
