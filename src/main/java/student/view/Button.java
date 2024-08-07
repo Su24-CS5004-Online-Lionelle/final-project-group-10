@@ -60,6 +60,22 @@ public class Button extends JButton {
     private final JComboBox<String> species_box;
     private final JComboBox<String> sort_box;
 
+    /**
+     * Index of current result being displayed.
+     */
+    private int index = 0;
+
+    /**
+     *
+     * @param buttonType
+     * @param controller
+     * @param search_field
+     * @param gender_box
+     * @param status_box
+     * @param species_box
+     * @param sort_box
+     */
+
     public Button(ButtonType buttonType, CharacterController controller, JTextField search_field,
                   JComboBox<String> gender_box, JComboBox<String> status_box, JComboBox<String> species_box, JComboBox<String> sort_box) {
         this.bt = buttonType;
@@ -131,6 +147,7 @@ public class Button extends JButton {
                     }
 
                 case NEXT:
+
 
                 case PREVIOUS:
             }

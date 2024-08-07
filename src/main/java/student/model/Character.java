@@ -22,6 +22,7 @@ public class Character implements ICharacter {
      **/
     private List<CharacterRecord> characterRecords = new ArrayList<>();
     private List<String> selectedURLs = new ArrayList<>();
+    private int pages;
 
     public Character() {
         // empty for now
@@ -69,7 +70,7 @@ public class Character implements ICharacter {
 
                 nextUrl = rootNode.path("info").path("next").asText(null);
             }
-
+            this.pages = this.selectedURLs.size();
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -79,7 +80,7 @@ public class Character implements ICharacter {
 
 
     public String getURL(int index) {
-        if (index < 0 || index >= characterRecords.size()) {
+        if (index < 0 || index >= this.pages) {
             return null;
         }
         return selectedURLs.get(index);
