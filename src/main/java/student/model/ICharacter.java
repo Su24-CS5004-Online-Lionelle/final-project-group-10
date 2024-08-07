@@ -12,6 +12,14 @@ import java.util.List;
 
 public interface ICharacter {
 
+    int getCurrIndex();
+
+    void increasePages();
+
+    void decreasePages();
+
+    void setCurrIndex(int index);
+
     List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending);
 
     List<CharacterRecord> getCharacterRecords();
@@ -20,7 +28,7 @@ public interface ICharacter {
 
     String getURL(int num);
 
-    List<CharacterRecord> getCharByPage(int page, boolean ascending);
+    List<CharacterRecord> getCharByPage(boolean ascending);
     /**
      * Character record to pass around between objects.
      * Uses Jackson annotations to map JSON fields to Java fields.

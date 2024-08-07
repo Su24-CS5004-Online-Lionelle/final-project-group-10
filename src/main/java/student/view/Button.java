@@ -60,10 +60,7 @@ public class Button extends JButton {
     private final JComboBox<String> species_box;
     private final JComboBox<String> sort_box;
 
-    /**
-     * Index of current result being displayed.
-     */
-    private int index = 0;
+
 
     /**
      * @param buttonType
@@ -87,16 +84,13 @@ public class Button extends JButton {
         addActionListener(new ButtonListener());
     }
 
-    public int getPage() {
-        return index;
-    }
 
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             switch (bt) {
                 case SEARCH:
-                    index = 0;
                     loadCharacters();
+                    displayChar();
 
 //                    List<ICharacter.CharacterRecord> characters = controller.loadCharacters(name, status, species, gender, ascending);
 //                    JFrameView.getInstance(controller).displayResults(characters);
@@ -153,18 +147,13 @@ public class Button extends JButton {
                     }
 
                 case NEXT:
-                    index++;
-                    loadCharacters();
+                    controller.increasePade();
+                    displayChar();
                     break;
 
                 case PREVIOUS:
-                    if (index == 1) {
-                        index = 0;
-                        loadCharacters();
-                    } else if (index > 1) {
-                        index--;
-                        loadCharacters();
-                    }
+                    controller.decreasePade();
+                    displayChar();
                     break;
             }
         }
@@ -184,14 +173,20 @@ public class Button extends JButton {
         boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
 
         controller.loadURL(name, status, species, gender, ascending);
-        List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(), ascending);
+
+    }
+    private void displayChar() {
+
+        String sort = (String) sort_box.getSelectedItem();
+        boolean ascending = "ascending".equalsIgnoreCase(sort);
+        List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(ascending);
         JFrameView.getInstance(controller).displayResults(characters);
 
         // if there's a next page
-        boolean hasNext = !(controller.getURL(getPage() + 1) == null);
+        boolean hasNext = !(controller.getURL(controller.getCurrentPage() + 1) == null);
         JFrameView.getInstance(controller).toggleNextButton(hasNext);
         // if there's a prev page
-        boolean hasPrev = getPage() > 0 && !controller.loadCurrPage(getPage() - 1, ascending).isEmpty();
+        boolean hasPrev = controller.getCurrentPage() > 0 && !controller.loadCurrPage(ascending).isEmpty();
         JFrameView.getInstance(controller).togglePrevButton(hasPrev);
     }
 }

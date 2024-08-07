@@ -82,12 +82,24 @@ public class CharacterController {
         return baos.toString();
     }
 
-    public List<ICharacter.CharacterRecord> loadCurrPage(int page, boolean ascending) {
-        return character.getCharByPage(page, ascending);
+    public List<ICharacter.CharacterRecord> loadCurrPage(boolean ascending) {
+        return character.getCharByPage(ascending);
 
     }
 
     public Character getModel() {
         return (Character) character;
+    }
+
+    public int getCurrentPage() {
+        return character.getCurrIndex();
+    }
+
+    public void increasePade() {
+        character.increasePages();
+    }
+
+    public void decreasePade() {
+        character.decreasePages();
     }
 }

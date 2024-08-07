@@ -24,6 +24,23 @@ public class Character implements ICharacter {
     private List<CharacterRecord> characterRecords = new ArrayList<>();
     private List<String> selectedURLs = new ArrayList<>();
     private int pages;
+    private int currIndex = 0;
+
+    public int getCurrIndex() {
+        return currIndex;
+    }
+
+    public void setCurrIndex(int currIndex) {
+        this.currIndex = currIndex;
+    }
+
+    public void increasePages() {
+        currIndex ++;
+    }
+
+    public void decreasePages() {
+        currIndex --;
+    }
 
     public Character() {
         // empty for now
@@ -123,8 +140,8 @@ public class Character implements ICharacter {
 
 
     @Override
-    public List<CharacterRecord> getCharByPage(int page, boolean ascending) {
-        String currUrl = this.getURL(page);
+    public List<CharacterRecord> getCharByPage(boolean ascending) {
+        String currUrl = this.getURL(currIndex);
         List<CharacterRecord> characters = new ArrayList<>();
         try {
             String response = NetUtils.getCharacterData(currUrl);
