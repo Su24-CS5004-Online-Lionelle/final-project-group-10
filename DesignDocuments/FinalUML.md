@@ -80,6 +80,7 @@ classDiagram
         -JComboBox~String~ status_box
         -JComboBox~String~ species_box
         -JComboBox~String~ sort_box
+        -int index
         +Button(ButtonType, CharacterController, JTextField, JComboBox~String~, JComboBox~String~, JComboBox~String~, JComboBox~String~)
     }    
     
@@ -87,6 +88,8 @@ classDiagram
         <<enum>>      
         SEARCH
         EXPORT
+        NEXT
+        PREVIOUS
     }
     
     class ButtonListener {
@@ -107,9 +110,13 @@ classDiagram
     
     class Character{
         -List~CharacterRecord~ characterRecords
+        -List~String~ selectedURLs
+        -int pages
         +Character()
         +getCharacterRecords(): List~CharacterRecord~
         +loadCharacters(String, String, String, String, boolean): List~CharacterRecord~
+        +getURL(int): String
+        +getPageNo(): int
         +getImageIcon(CharacterRecord): ImageIcon
     }
     
