@@ -66,7 +66,6 @@ public class Button extends JButton {
     private int index = 0;
 
     /**
-     *
      * @param buttonType
      * @param controller
      * @param search_field
@@ -162,6 +161,9 @@ public class Button extends JButton {
                     if (index == 1) {
                         index = 0;
                         loadCharacters();
+                    } else if (index > 1) {
+                        index--;
+                        loadCharacters();
                     }
                     break;
             }
@@ -181,12 +183,12 @@ public class Button extends JButton {
 
         boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
 
-        controller.loadURL(name,status,species,gender,ascending);
-        List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(),ascending);
+        controller.loadURL(name, status, species, gender, ascending);
+        List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(), ascending);
         JFrameView.getInstance(controller).displayResults(characters);
 
         // if there's a next page
-        boolean hasNext = !controller.loadCurrPage(getPage() + 1, ascending).isEmpty();
+        boolean hasNext = !(controller.getURL(getPage() + 1) == null);
         JFrameView.getInstance(controller).toggleNextButton(hasNext);
         // if there's a prev page
         boolean hasPrev = getPage() > 0 && !controller.loadCurrPage(getPage() - 1, ascending).isEmpty();

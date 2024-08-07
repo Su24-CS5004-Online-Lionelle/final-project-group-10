@@ -63,6 +63,10 @@ public class CharacterController {
         }
     }
 
+    public String getURL(int num) {
+        return character.getURL(num);
+    }
+
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
     }

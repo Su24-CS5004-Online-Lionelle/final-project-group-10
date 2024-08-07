@@ -18,6 +18,8 @@ public interface ICharacter {
 
     void loadURL(String name, String status, String species, String gender, boolean ascending);
 
+    String getURL(int num);
+
     List<CharacterRecord> getCharByPage(int page, boolean ascending);
     /**
      * Character record to pass around between objects.
