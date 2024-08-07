@@ -8,26 +8,51 @@ import student.model.ICharacter;
 import java.awt.*;
 import java.util.List;
 
-// feel free to rename
+/**
+ * Class to represent the JFrame view of the application.
+ * Extends JFrame class.
+ * Implements the IView interface.
+ */
 public class JFrameView extends JFrame implements IView {
-
+    /** The instance of the JFrameView. */
     private static JFrameView instance;
+    /**
+     * The Setting object for the application.
+     * Used to get information like font, font size, and String properties for Buttons and JLabels.
+     */
     private static final Settings SETTINGS = Settings.getInstance();
+    /** Tbe controller for the application. */
     private CharacterController controller;
+    /** Dropdown boxes for the filters. */
     private Menu menu;
-    private JTextField search_field;
-    private Button search_button;
-    private Button export_button;
-    private Button next_button;
-    private Button previous_button;
-    private JFileChooser file_chooser;
-    private JPanel display_area;
+    /** The search bar for the user to input a character name to search. */
+    private JTextField searchField;
+    /** The search button to search for a character. */
+    private Button searchButton;
+    /** The export file button to export search results to a file. */
+    private Button exportButton;
+    /** The next button for the next page of results. */
+    private Button nextButton;
+    /** The previous button for the previous page of results. */
+    private Button previousButton;
+    /** The file chooser to save files. */
+    private JFileChooser fileChooser;
+    /** The JPanel to display the search resuts. */
+    private JPanel displayArea;
+    /** The JPanel that holds the display area and next and previous buttons. */
     private JPanel resultsPanel;
+    /** Scrollpane for the display area to scroll through results. */
     private JScrollPane scrollPane;
+    /** The JPanel that holds the next and previous buttons. */
     private JPanel prevNextPanel;
 
+    /** Constructor for the JFrameView class.
+     * Intializes the JFrame with the controller.
+     * 
+     * @param controller the controller for the application.
+     */
     public JFrameView(CharacterController controller){
-        super(SETTINGS.CAPTION);
+        super(SETTINGS.getCaption());
         this.controller = controller;
         this.controller.setView(this);
         setLocationRelativeTo(null);
@@ -40,6 +65,12 @@ public class JFrameView extends JFrame implements IView {
         setSize(600, 600);
     }
 
+    /**
+     * Getter method to retrieve an instance of the JFrameView class.
+     * 
+     * @param controller the controller for the application.
+     * @return the instance of the JFrameView.
+     */
     public static JFrameView getInstance(CharacterController controller) {
         if (instance == null) {
             instance = new JFrameView(controller);
@@ -47,74 +78,87 @@ public class JFrameView extends JFrame implements IView {
         return instance;
     }
 
+    /**
+     * Creates the buttons, menus, and display area for the JFrame.
+     * @see Button#Button()
+     * @see ButtonListener#actionPerformed(ActionEvent e)
+    */
     private void createWindowAndButtons() {
-        search_field = new JTextField(24);
-        display_area = new JPanel();
-        display_area.setLayout(new BoxLayout(display_area, BoxLayout.Y_AXIS));
-        file_chooser = new JFileChooser();
+        searchField = new JTextField(24);
+        displayArea = new JPanel();
+        displayArea.setLayout(new BoxLayout(displayArea, BoxLayout.Y_AXIS));
+        fileChooser = new JFileChooser();
 
-        search_button = new Button(Button.ButtonType.SEARCH, controller, search_field,
+        searchButton = new Button(Button.ButtonType.SEARCH, controller, searchField,
                 menu.getGenderBox(), menu.getStatusBox(), menu.getSpeciesBox(), menu.getSortBox());
-        search_button.setText(SETTINGS.SEARCH);
+        searchButton.setText(SETTINGS.getSearch());
 
-        export_button = new Button(Button.ButtonType.EXPORT, controller, search_field,
+        exportButton = new Button(Button.ButtonType.EXPORT, controller, searchField,
                 menu.getGenderBox(), menu.getStatusBox(), menu.getSpeciesBox(), menu.getSortBox());
-        export_button.setText(SETTINGS.EXPORT);
+        exportButton.setText(SETTINGS.getExport());
 
-        next_button = new Button(Button.ButtonType.NEXT, controller, search_field,
+        nextButton = new Button(Button.ButtonType.NEXT, controller, searchField,
                 menu.getGenderBox(), menu.getStatusBox(), menu.getSpeciesBox(), menu.getSortBox());
-        next_button.setText(SETTINGS.NEXT);
-        next_button.setVisible(false);
+        nextButton.setText(SETTINGS.getNext());
+        nextButton.setVisible(false);
 
-        previous_button = new Button(Button.ButtonType.PREVIOUS, controller, search_field,
+        previousButton = new Button(Button.ButtonType.PREVIOUS, controller, searchField,
                 menu.getGenderBox(), menu.getStatusBox(), menu.getSpeciesBox(), menu.getSortBox());
-        previous_button.setText(SETTINGS.PREVIOUS);
-        previous_button.setVisible(false);
+        previousButton.setText(SETTINGS.getPrevious());
+        previousButton.setVisible(false);
     }
 
+    /**
+     * Create JPanels and adds the buttons, menus, and display area to the respective panels.
+     * @see Menu#Menu()
+    */
     private void addComponents() {
         setLayout(new BorderLayout());
         JPanel northPanel = new JPanel(new GridLayout(5, 2, 0, 0));
 
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        searchPanel.add(search_field);
-        searchPanel.add(search_button);
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
         northPanel.add(searchPanel);
 
         JPanel filterPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        filterPanel1.add(new JLabel(SETTINGS.GENDER));
+        filterPanel1.add(new JLabel(SETTINGS.getGender()));
         filterPanel1.add(menu.getGenderBox());
-        filterPanel1.add(new JLabel(SETTINGS.STATUS));
+        filterPanel1.add(new JLabel(SETTINGS.getStatus()));
         filterPanel1.add(menu.getStatusBox());
         northPanel.add(filterPanel1);
 
         JPanel filterPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        filterPanel2.add(new JLabel(SETTINGS.SPECIES));
+        filterPanel2.add(new JLabel(SETTINGS.getSpecies()));
         filterPanel2.add(menu.getSpeciesBox());
-        filterPanel2.add(new JLabel(SETTINGS.SORT));
+        filterPanel2.add(new JLabel(SETTINGS.getSort()));
         filterPanel2.add(menu.getSortBox());
         northPanel.add(filterPanel2);
 
         JPanel exportPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        exportPanel.add(export_button);
+        exportPanel.add(exportButton);
         northPanel.add(exportPanel);
 
         add(northPanel, BorderLayout.NORTH);
 
         resultsPanel = new JPanel(new BorderLayout());
-        scrollPane = new JScrollPane(display_area);
+        scrollPane = new JScrollPane(displayArea);
         resultsPanel.add(scrollPane, BorderLayout.CENTER);
 
         prevNextPanel = new JPanel(new GridLayout(1, 2));
-        prevNextPanel.add(previous_button);
-        prevNextPanel.add(next_button);
+        prevNextPanel.add(previousButton);
+        prevNextPanel.add(nextButton);
         resultsPanel.add(prevNextPanel, BorderLayout.SOUTH);
 
         add(resultsPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * 
+     * @param characters
+     */
     public void displayResults(List<ICharacter.CharacterRecord> characters) {
-        display_area.removeAll();
+        displayArea.removeAll();
         for (ICharacter.CharacterRecord character : characters) {
             JPanel characterPanel = new JPanel();
             characterPanel.setLayout(new BoxLayout(characterPanel, BoxLayout.X_AXIS));
@@ -133,22 +177,32 @@ public class JFrameView extends JFrame implements IView {
 
             characterPanel.add(imageLabel);
             characterPanel.add(textArea);
-            display_area.add(characterPanel);
+            displayArea.add(characterPanel);
         }
-        display_area.revalidate();
-        display_area.repaint();
+        displayArea.revalidate();
+        displayArea.repaint();
 
         resetScrollBar();
     }
 
+    /**
+     * Set the next button to be visible if there is a next page to load.
+     * 
+     * @param hasNext a boolean value, returns true if there is a next page to load, false otherwise
+     */
     public void toggleNextButton(boolean hasNext) {
-        next_button.setVisible(hasNext);
+        nextButton.setVisible(hasNext);
         prevNextPanel.revalidate();
         prevNextPanel.repaint();
     }
 
+    /**
+     * Set the previous button to be visible if there is a previous page to load.
+     * 
+     * @param hasPrev boolean, returns true if there is a previous page to load, false otherwise
+     */
     public void togglePrevButton(boolean hasPrev) {
-        previous_button.setVisible(hasPrev);
+        previousButton.setVisible(hasPrev);
         prevNextPanel.revalidate();
         prevNextPanel.repaint();
     }
