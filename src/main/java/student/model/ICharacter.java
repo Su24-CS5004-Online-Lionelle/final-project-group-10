@@ -16,6 +16,9 @@ public interface ICharacter {
 
     List<CharacterRecord> getCharacterRecords();
 
+    void loadURL(String name, String status, String species, String gender, boolean ascending);
+
+    List<CharacterRecord> getCharByPage(int page, boolean ascending);
     /**
      * Character record to pass around between objects.
      * Uses Jackson annotations to map JSON fields to Java fields.
