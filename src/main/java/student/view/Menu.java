@@ -15,10 +15,10 @@ public class Menu extends JFrame implements ItemListener {
 
 
     public Menu() {
-        String[] genders = SETTINGS.GENDER_OPTION.split(",");
-        String[] statuses = SETTINGS.STATUS_OPTION.split(",");
-        String[] species = SETTINGS.SPECIES_OPTION.split(",");
-        String[] sorts = SETTINGS.SORT_OPTION.split(",");
+        String[] genders = SETTINGS.getGenderOption().split(",");
+        String[] statuses = SETTINGS.getStatusOption().split(",");
+        String[] species = SETTINGS.getSpeciesOption().split(",");
+        String[] sorts = SETTINGS.getSortOption().split(",");
 
         gender_box = new JComboBox<>(genders);
         status_box = new JComboBox<>(statuses);
