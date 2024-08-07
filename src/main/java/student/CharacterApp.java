@@ -10,7 +10,18 @@ import student.view.JFrameView;
 /**
  * Main driver for the program.
  */
-public class CharacterApp {
+public final class CharacterApp {
+
+    /** Private constructor to prevent instantiation. */
+    private CharacterApp() {
+        //empty
+    }
+    
+    /**
+     * Main entry point for the program.
+     * 
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         ICharacter model = new Character();
         CharacterController controller = new CharacterController(model);
