@@ -117,6 +117,18 @@ public class Button extends JButton {
                     break;
 
                 case EXPORT:
+                    String name1 = search_field.getText();
+                    String gender1 = (String) gender_box.getSelectedItem();
+                    String status1 = (String) status_box.getSelectedItem();
+                    String species1 = (String) species_box.getSelectedItem();
+                    String sort1 = (String) sort_box.getSelectedItem();
+
+                    if ("all".equalsIgnoreCase(gender1)) gender = "";
+                    if ("all".equalsIgnoreCase(status1)) status = "";
+                    if ("all".equalsIgnoreCase(species1)) species = "";
+
+                    boolean ascending1 = "ascending".equalsIgnoreCase(sort1);
+                    List<ICharacter.CharacterRecord> characters1 = controller.loadCharacters(name1, status1, species1, gender1, ascending1);
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setDialogTitle("Save File");
 
