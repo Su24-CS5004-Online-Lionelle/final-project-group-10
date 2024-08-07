@@ -14,6 +14,8 @@ public class Settings {
     public final String STATUS;
     public final String SPECIES;
     public final String EXPORT;
+    public final String NEXT;
+    public final String PREVIOUS;
     public final String SORT;
     public final String FONT;
     public final int FONT_SIZE;
@@ -31,6 +33,8 @@ public class Settings {
         STATUS = prop.getProperty("status");
         SPECIES = prop.getProperty("species");
         EXPORT = prop.getProperty("export");
+        NEXT = prop.getProperty("next");
+        PREVIOUS = prop.getProperty("previous");
         SORT = prop.getProperty("sort");
         FONT = prop.getProperty("font");
         FONT_SIZE = Integer.parseInt(prop.getProperty("font_size"));
