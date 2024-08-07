@@ -96,21 +96,8 @@ public class Button extends JButton {
         public void actionPerformed(ActionEvent e) {
             switch (bt) {
                 case SEARCH:
-                    String name = search_field.getText();
-                    String gender = (String) gender_box.getSelectedItem();
-                    String status = (String) status_box.getSelectedItem();
-                    String species = (String) species_box.getSelectedItem();
-                    String sort = (String) sort_box.getSelectedItem();
-
-                    if ("all".equalsIgnoreCase(gender)) gender = "";
-                    if ("all".equalsIgnoreCase(status)) status = "";
-                    if ("all".equalsIgnoreCase(species)) species = "";
-
-                    boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
-
-                    controller.loadURL(name,status,species,gender,ascending);
-                    List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(),ascending);
-                    JFrameView.getInstance(controller).displayResults(characters);
+                    index = 0;
+                    loadCharacters();
 
 //                    List<ICharacter.CharacterRecord> characters = controller.loadCharacters(name, status, species, gender, ascending);
 //                    JFrameView.getInstance(controller).displayResults(characters);
@@ -123,9 +110,9 @@ public class Button extends JButton {
                     String species1 = (String) species_box.getSelectedItem();
                     String sort1 = (String) sort_box.getSelectedItem();
 
-                    if ("all".equalsIgnoreCase(gender1)) gender = "";
-                    if ("all".equalsIgnoreCase(status1)) status = "";
-                    if ("all".equalsIgnoreCase(species1)) species = "";
+                    if ("all".equalsIgnoreCase(gender1)) gender1 = "";
+                    if ("all".equalsIgnoreCase(status1)) status1 = "";
+                    if ("all".equalsIgnoreCase(species1)) species1 = "";
 
                     boolean ascending1 = "ascending".equalsIgnoreCase(sort1);
                     List<ICharacter.CharacterRecord> characters1 = controller.loadCharacters(name1, status1, species1, gender1, ascending1);
@@ -167,10 +154,42 @@ public class Button extends JButton {
                     }
 
                 case NEXT:
-
+                    index++;
+                    loadCharacters();
+                    break;
 
                 case PREVIOUS:
+                    if (index == 1) {
+                        index = 0;
+                        loadCharacters();
+                    }
+                    break;
             }
         }
+    }
+
+    private void loadCharacters() {
+        String name = search_field.getText();
+        String gender = (String) gender_box.getSelectedItem();
+        String status = (String) status_box.getSelectedItem();
+        String species = (String) species_box.getSelectedItem();
+        String sort = (String) sort_box.getSelectedItem();
+
+        if ("all".equalsIgnoreCase(gender)) gender = "";
+        if ("all".equalsIgnoreCase(status)) status = "";
+        if ("all".equalsIgnoreCase(species)) species = "";
+
+        boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
+
+        controller.loadURL(name,status,species,gender,ascending);
+        List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(),ascending);
+        JFrameView.getInstance(controller).displayResults(characters);
+
+        // if there's a next page
+        boolean hasNext = !controller.loadCurrPage(getPage() + 1, ascending).isEmpty();
+        JFrameView.getInstance(controller).toggleNextButton(hasNext);
+        // if there's a prev page
+        boolean hasPrev = getPage() > 0 && !controller.loadCurrPage(getPage() - 1, ascending).isEmpty();
+        JFrameView.getInstance(controller).togglePrevButton(hasPrev);
     }
 }
