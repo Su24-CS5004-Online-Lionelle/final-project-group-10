@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,25 +53,37 @@ public class Character implements ICharacter {
     public List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         try {
             List<CharacterRecord> characters = new ArrayList<>();
-            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
-
-            while (nextUrl != null) {
-                String response = NetUtils.getCharacterData(nextUrl);
+            for (String url : this.selectedURLs) {
+                String response = NetUtils.getCharacterData(url);
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootNode = mapper.readTree(response);
                 JsonNode infoNode = rootNode.path("results");
                 if (Objects.isNull(infoNode) || infoNode.isEmpty()) {
                     break;
                 }
-
-                List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {
-                });
+                List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(),
+                        new TypeReference<List<CharacterRecord>>() {
+                        });
                 characters.addAll(pageRecords);
-                this.selectedURLs.add(nextUrl);
-
-                nextUrl = rootNode.path("info").path("next").asText(null);
             }
-            this.pages = this.selectedURLs.size();
+//            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
+//
+//            while (nextUrl != null) {
+//                String response = NetUtils.getCharacterData(nextUrl);
+//                ObjectMapper mapper = new ObjectMapper();
+//                JsonNode rootNode = mapper.readTree(response);
+//                JsonNode infoNode = rootNode.path("results");
+//                if (Objects.isNull(infoNode) || infoNode.isEmpty()) {
+//                    break;
+//                }
+//
+//                List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(),
+//                        new TypeReference<List<CharacterRecord>>() {
+//                        });
+//                characters.addAll(pageRecords);
+//                nextUrl = rootNode.path("info").path("next").asText(null);
+//            }
+
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -78,6 +91,28 @@ public class Character implements ICharacter {
         return characterRecords;
     }
 
+    @Override
+    public void loadURL(String name, String status, String species, String gender, boolean ascending) {
+        try {
+            this.selectedURLs.clear();
+            String currURL = NetUtils.getCharacterUrl(name, status, species, gender);
+
+            while (currURL != null) {
+                this.selectedURLs.add(currURL);
+                String response = NetUtils.getCharacterData(currURL);
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode rootNode = mapper.readTree(response);
+                currURL = rootNode.path("info").path("next").asText(null);
+            }
+            this.pages = this.selectedURLs.size();
+            if (!ascending) {
+                Collections.reverse(this.selectedURLs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public String getURL(int index) {
         if (index < 0 || index >= this.pages) {
@@ -86,8 +121,23 @@ public class Character implements ICharacter {
         return selectedURLs.get(index);
     }
 
-    public int getPageNo(){
-        return this.pages;
+
+    @Override
+    public List<CharacterRecord> getCharByPage(int page, boolean ascending) {
+        String currUrl = this.getURL(page);
+        List<CharacterRecord> characters = new ArrayList<>();
+        try {
+            String response = NetUtils.getCharacterData(currUrl);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response);
+            JsonNode infoNode = rootNode.path("results");
+            characters = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        characters = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
+        return characters;
     }
 
     public ImageIcon getImageIcon(CharacterRecord characterRecord) {

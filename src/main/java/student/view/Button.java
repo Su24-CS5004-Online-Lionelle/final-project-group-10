@@ -88,6 +88,10 @@ public class Button extends JButton {
         addActionListener(new ButtonListener());
     }
 
+    public int getPage() {
+        return index;
+    }
+
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             switch (bt) {
@@ -104,8 +108,12 @@ public class Button extends JButton {
 
                     boolean ascending = "ascending".equalsIgnoreCase(sort); // true if ascending, false if descending
 
-                    List<ICharacter.CharacterRecord> characters = controller.loadCharacters(name, status, species, gender, ascending);
+                    controller.loadURL(name,status,species,gender,ascending);
+                    List<ICharacter.CharacterRecord> characters = controller.loadCurrPage(getPage(),ascending);
                     JFrameView.getInstance(controller).displayResults(characters);
+
+//                    List<ICharacter.CharacterRecord> characters = controller.loadCharacters(name, status, species, gender, ascending);
+//                    JFrameView.getInstance(controller).displayResults(characters);
                     break;
 
                 case EXPORT:

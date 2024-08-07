@@ -13,11 +13,17 @@ import java.util.List;
 
 // feel free to rename
 public class CharacterController {
-    /** The character model. */
+    /**
+     * The character model.
+     */
     private final ICharacter character;
-    /** The format to output. */
+    /**
+     * The format to output.
+     */
     private Formats format = Formats.TXT;
-    /** JFrameView to display output to the user. */
+    /**
+     * JFrameView to display output to the user.
+     */
     private JFrameView view;
 
     public void setView(JFrameView view) {
@@ -49,6 +55,13 @@ public class CharacterController {
         DataFormatter.write(characters, format, out);
     }
 
+    public void loadURL(String name, String status, String species, String gender, boolean ascending) {
+        try {
+            character.loadURL(name, status, species, gender, ascending);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
@@ -63,6 +76,11 @@ public class CharacterController {
         PrintStream ps = new PrintStream(baos);
         DataFormatter.txtPrintSingle(character, ps);
         return baos.toString();
+    }
+
+    public List<ICharacter.CharacterRecord> loadCurrPage(int page, boolean ascending) {
+        return character.getCharByPage(page, ascending);
+
     }
 
     public Character getModel() {
