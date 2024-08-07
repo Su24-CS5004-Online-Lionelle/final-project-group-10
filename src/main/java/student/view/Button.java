@@ -13,24 +13,48 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-/** Button class for the view of the program. */
+/**
+ * Button class for the view of the program.
+ */
 public class Button extends JButton {
 
-    /** Enum for the type of button. */
+    /**
+     * Enum for the type of button.
+     */
     enum ButtonType {
-        /** Search button. */
+        /**
+         * Search button.
+         */
         SEARCH,
-        /** Export button. */
-        EXPORT
+        /**
+         * Export button.
+         */
+        EXPORT,
+        /**
+         * Next button.
+         */
+        NEXT,
+        /**
+         * Previous button.
+         */
+        PREVIOUS
     }
 
-    /** Controller for the program. */
+    /**
+     * Controller for the program.
+     */
     private final CharacterController controller;
-    /** Type of button. */
+    /**
+     * Type of button.
+     */
     private final ButtonType bt;
-    /** Text field for search. */
+    /**
+     * Text field for search.
+     */
     private final JTextField search_field;
-    /** Dropdown for gender. */
+    /**
+     * Dropdown for gender.
+     */
     private final JComboBox<String> gender_box;
     private final JComboBox<String> status_box;
     private final JComboBox<String> species_box;
@@ -105,7 +129,10 @@ public class Button extends JButton {
                             ex.printStackTrace();
                         }
                     }
-                    break;
+
+                case NEXT:
+
+                case PREVIOUS:
             }
         }
     }

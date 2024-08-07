@@ -12,10 +12,7 @@ public class Menu extends JFrame implements ItemListener {
     static JComboBox<String> status_box;
     static JComboBox<String> species_box;
     static JComboBox<String> sort_box;
-    private String selected_gender = "All";
-    private String selected_status = "All";
-    private String selected_species = "All";
-    private String selected_sort = "Ascending";
+
 
     public Menu() {
         String[] genders = SETTINGS.GENDER_OPTION.split(",");
@@ -44,18 +41,7 @@ public class Menu extends JFrame implements ItemListener {
      */
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if (e.getSource() == gender_box) {
-            selected_gender = gender_box.getSelectedItem().toString();
-        }
-        if (e.getSource() == status_box) {
-            selected_status = status_box.getSelectedItem().toString();
-        }
-        if (e.getSource() == species_box) {
-            selected_species = species_box.getSelectedItem().toString();
-        }
-        if (e.getSource() == sort_box) {
-            selected_sort = sort_box.getSelectedItem().toString();
-        }
+
     }
 
     public JComboBox<String> getGenderBox() {

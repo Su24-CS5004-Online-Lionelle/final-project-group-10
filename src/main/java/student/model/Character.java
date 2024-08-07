@@ -41,10 +41,10 @@ public class Character implements ICharacter {
      * Throws a RuntimeException if there is an IOException.
      * Throws an InterruptedException if the thread is interrupted.
      *
-     * @param name     the name of the character
-     * @param status   the status of the character
-     * @param species  the species of the character
-     * @param gender   the gender of the character
+     * @param name      the name of the character
+     * @param status    the status of the character
+     * @param species   the species of the character
+     * @param gender    the gender of the character
      * @param ascending true if the records should be sorted in ascending order, false otherwise.
      */
     @Override
@@ -78,7 +78,10 @@ public class Character implements ICharacter {
     }
 
 
-    public String getURL(int index){
+    public String getURL(int index) {
+        if (index < 0 || index >= characterRecords.size()) {
+            return null;
+        }
         return selectedURLs.get(index);
     }
 
