@@ -48,6 +48,10 @@ public final class NetUtils {
      * @throws InterruptedException if the thread is interrupted.
      */
     public static String getCharacterData(String url) throws IOException, InterruptedException {
+        if (url == null || url.isEmpty()) {
+            throw new IllegalArgumentException("URL cannot be null or empty");
+        }
+        
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
