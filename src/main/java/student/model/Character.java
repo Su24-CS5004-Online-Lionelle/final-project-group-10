@@ -65,7 +65,7 @@ public class Character implements ICharacter {
 
                 List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(),
                         new TypeReference<List<CharacterRecord>>() {
-                });
+                        });
                 characters.addAll(pageRecords);
                 this.selectedURLs.add(nextUrl);
 
@@ -87,22 +87,21 @@ public class Character implements ICharacter {
         return selectedURLs.get(index);
     }
 
-    public int getPageNo(){
+    public int getPageNo() {
         return this.pages;
     }
 
 
-    public List<CharacterRecord> getCharByPage (String currUrl) {
+    public List<CharacterRecord> getCharByPage(String currUrl) {
         List<CharacterRecord> characters = new ArrayList<>();
         try {
             String response = NetUtils.getCharacterData(currUrl);
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(response);
             JsonNode infoNode = rootNode.path("results");
-            characters = mapper.readValue(infoNode.toString(),new TypeReference<List<CharacterRecord>>() {});
-
-        }
-        catch (Exception e) {
+            characters = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return characters;
