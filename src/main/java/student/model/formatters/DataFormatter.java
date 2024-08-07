@@ -9,9 +9,6 @@ import javax.annotation.Nonnull;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * A class to format the data into XML, CSV, JSON, or TXT files.
@@ -128,7 +125,8 @@ public final class DataFormatter {
      * @param format     the format to write the records in
      * @param out        the output stream to write to.
      */
-    public static void write(@Nonnull Collection<CharacterRecord> characters, @Nonnull Formats format, OutputStream out) {
+    public static void write(@Nonnull Collection<CharacterRecord> characters,
+                                    @Nonnull Formats format, OutputStream out) {
         switch (format) {
             case XML:
                 writeXmlData(characters, out);
