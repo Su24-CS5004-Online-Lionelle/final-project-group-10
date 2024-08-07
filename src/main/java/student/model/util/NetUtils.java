@@ -24,7 +24,6 @@ public final class NetUtils {
      * @param status The character's status (dead, alive, unknown).
      * @param species The character's species.
      * @param gender The character's gender.
-     * @param episodes The episodes in which the character appears.
      * @return string URL containing API response.
      * @throws IOException if search is not successful.
      */

@@ -21,6 +21,7 @@ public class Character implements ICharacter {
      * The list of character records.
      **/
     private List<CharacterRecord> characterRecords = new ArrayList<>();
+    private List<String> selectedURLs = new ArrayList<>();
 
     public Character() {
         // empty for now
@@ -64,6 +65,7 @@ public class Character implements ICharacter {
                 List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(), new TypeReference<List<CharacterRecord>>() {
                 });
                 characters.addAll(pageRecords);
+                this.selectedURLs.add(nextUrl);
 
                 nextUrl = rootNode.path("info").path("next").asText(null);
             }
@@ -74,6 +76,12 @@ public class Character implements ICharacter {
         }
         return characterRecords;
     }
+
+
+    public String getURL(int index){
+        return selectedURLs.get(index);
+    }
+
 
     public ImageIcon getImageIcon(CharacterRecord characterRecord) {
         try {
