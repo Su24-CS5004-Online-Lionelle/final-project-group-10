@@ -94,6 +94,7 @@ public class Character implements ICharacter {
     @Override
     public void loadURL(String name, String status, String species, String gender, boolean ascending) {
         try {
+            this.selectedURLs.clear();
             String currURL = NetUtils.getCharacterUrl(name, status, species, gender);
 
             while (currURL != null) {
