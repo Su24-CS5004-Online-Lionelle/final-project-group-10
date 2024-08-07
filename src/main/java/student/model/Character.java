@@ -86,6 +86,9 @@ public class Character implements ICharacter {
         return selectedURLs.get(index);
     }
 
+    public int getPageNo(){
+        return this.pages;
+    }
 
     public ImageIcon getImageIcon(CharacterRecord characterRecord) {
         try {
