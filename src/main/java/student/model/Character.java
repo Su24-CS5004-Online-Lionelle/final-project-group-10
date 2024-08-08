@@ -18,28 +18,61 @@ import java.net.URL;
 
 public class Character implements ICharacter {
 
-    /** The list of character records. */
+    /**
+     * The list of character records.
+     **/
     private List<CharacterRecord> characterRecords = new ArrayList<>();
+
+    /**
+     * The list of urls returned from api inquiry.
+     */
     private List<String> selectedURLs = new ArrayList<>();
+
+    /**
+     * The total number of pages of result.
+     */
     private int pages;
+
+    /**
+     * The current page no.
+     */
     private int currIndex = 0;
 
+    /**
+     * Get the current page no.
+     *
+     * @return Current page no.
+     */
     public int getCurrIndex() {
         return currIndex;
     }
 
+    /**
+     * Set the current page num to currIndex.
+     *
+     * @param currIndex The page number to go to.
+     */
     public void setCurrIndex(int currIndex) {
         this.currIndex = currIndex;
     }
 
+    /**
+     * Go to the next page by increasing the page number by 1.
+     */
     public void increasePages() {
-        currIndex ++;
+        currIndex++;
     }
 
+    /**
+     * Go to the previous page by decreasing the page number by 1.
+     */
     public void decreasePages() {
-        currIndex --;
+        currIndex--;
     }
 
+    /**
+     * Contructor.
+     */
     public Character() {
         // empty for now
     }
@@ -54,8 +87,7 @@ public class Character implements ICharacter {
      * The records will be filtered and sorted based on the given parameters.
      * The records will be stored in the characterRecords field.
      * If the API returns an empty list, characterRecords will be set to an empty list.
-     * If there is more than one page of results,
-     * the method will continue to load the next page until there are no more pages.
+     * If there is more than one page of results, the method will continue to load the next page until there are no more pages.
      * Throws a RuntimeException if there is an IOException.
      * Throws an InterruptedException if the thread is interrupted.
      *
@@ -82,6 +114,24 @@ public class Character implements ICharacter {
                         });
                 characters.addAll(pageRecords);
             }
+//            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
+//
+//            while (nextUrl != null) {
+//                String response = NetUtils.getCharacterData(nextUrl);
+//                ObjectMapper mapper = new ObjectMapper();
+//                JsonNode rootNode = mapper.readTree(response);
+//                JsonNode infoNode = rootNode.path("results");
+//                if (Objects.isNull(infoNode) || infoNode.isEmpty()) {
+//                    break;
+//                }
+//
+//                List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(),
+//                        new TypeReference<List<CharacterRecord>>() {
+//                        });
+//                characters.addAll(pageRecords);
+//                nextUrl = rootNode.path("info").path("next").asText(null);
+//            }
+
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -112,6 +162,13 @@ public class Character implements ICharacter {
 
     }
 
+
+    /**
+     * Get the url at index pos in the url list.
+     *
+     * @param index The position of the url to be returned.
+     * @return The url at position index.
+     */
     public String getURL(int index) {
         if (index < 0 || index >= this.pages) {
             return null;
@@ -139,10 +196,10 @@ public class Character implements ICharacter {
     }
 
     /**
-     * Get the image icon for the given character record.
-     * The image will be resized to 200x200 pixels.
-     * @param characterRecord the character record to get the image icon for.
-     * @return the image icon for the character record.
+     * Generate the image to the character based on an url.
+     *
+     * @param characterRecord The characterRecord object that contains the url of the image.
+     * @return an ImageIcon object
      */
     public ImageIcon getImageIcon(CharacterRecord characterRecord) {
         try {
