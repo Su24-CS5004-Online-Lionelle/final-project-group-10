@@ -22,26 +22,57 @@ public class Character implements ICharacter {
      * The list of character records.
      **/
     private List<CharacterRecord> characterRecords = new ArrayList<>();
+
+    /**
+     * The list of urls returned from api inquiry.
+     */
     private List<String> selectedURLs = new ArrayList<>();
+
+    /**
+     * The total number of pages of result.
+     */
     private int pages;
+
+    /**
+     * The current page no.
+     */
     private int currIndex = 0;
 
+    /**
+     * Get the current page no.
+     *
+     * @return Current page no.
+     */
     public int getCurrIndex() {
         return currIndex;
     }
 
+    /**
+     * Set the current page num to currIndex.
+     *
+     * @param currIndex The page number to go to.
+     */
     public void setCurrIndex(int currIndex) {
         this.currIndex = currIndex;
     }
 
+    /**
+     * Go to the next page by increasing the page number by 1.
+     */
     public void increasePages() {
-        currIndex ++;
+        currIndex++;
     }
 
+    /**
+     * Go to the previous page by decreasing the page number by 1.
+     */
     public void decreasePages() {
-        currIndex --;
+        currIndex--;
     }
 
+    /**
+     * Contructor.
+     */
     public Character() {
         // empty for now
     }
@@ -131,6 +162,13 @@ public class Character implements ICharacter {
 
     }
 
+
+    /**
+     * Get the url at index pos in the url list.
+     *
+     * @param index The position of the url to be returned.
+     * @return The url at position index.
+     */
     public String getURL(int index) {
         if (index < 0 || index >= this.pages) {
             return null;
@@ -157,6 +195,12 @@ public class Character implements ICharacter {
         return characters;
     }
 
+    /**
+     * Generate the image to the character based on an url.
+     *
+     * @param characterRecord The characterRecord object that contains the url of the image.
+     * @return an ImageIcon object
+     */
     public ImageIcon getImageIcon(CharacterRecord characterRecord) {
         try {
             URL url = new URL(characterRecord.image());
