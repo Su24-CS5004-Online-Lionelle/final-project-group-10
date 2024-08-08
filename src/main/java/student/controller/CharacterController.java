@@ -11,25 +11,29 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-// feel free to rename
 public class CharacterController {
     /**
      * The character model.
      */
     private final ICharacter character;
     /**
-     * The format to output.
-     */
-    private Formats format = Formats.TXT;
-    /**
      * JFrameView to display output to the user.
      */
     private JFrameView view;
 
+    /**
+     * Set the view for the controller.
+     * @param view the JFrameView to set.
+     */
     public void setView(JFrameView view) {
         this.view = view;
     }
 
+    /**
+     * Constructor for the CharacterController.
+     * 
+     * @param character the character model.
+     */
     public CharacterController(ICharacter character) {
         if (character == null) {
             throw new IllegalArgumentException("Character model is not initialized");
@@ -37,7 +41,15 @@ public class CharacterController {
         this.character = character;
     }
 
-
+    /**
+     * Write the characters to the output stream in the specified format.
+     *
+     * @param characters the list of characters to write.
+     * @param fileExtension the file extension.
+     * @param out the output stream to write to.
+     * @see DataFormatter#write(@Nonnull Collection<ICharacter.CharacterRecord> characters,
+     *                                     @Nonnull Formats format, OutputStream out)
+     */    
     public void writeCharacters(List<ICharacter.CharacterRecord> characters, String fileExtension, OutputStream out) {
         Formats format;
         switch (fileExtension) {
