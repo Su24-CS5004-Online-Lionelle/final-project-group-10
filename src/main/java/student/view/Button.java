@@ -152,12 +152,12 @@ public class Button extends JButton {
                     }
 
                 case NEXT:
-                    controller.increasePade();
+                    controller.increasePage();
                     displayChar();
                     break;
 
                 case PREVIOUS:
-                    controller.decreasePade();
+                    controller.decreasePage();
                     displayChar();
                     break;
 
