@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="caption">Rick and Morty Character Search</entry>
+    <entry key="font">Old English Text MT</entry>
+    <entry key="font_size">14</entry>
+    <entry key="search">Search for Character</entry>
+    <entry key="gender">Filter by Gender</entry>
+    <entry key="status">Filter by Status</entry>
+    <entry key="species">Filter by Species</entry>
+    <entry key="export">Export Results to File</entry>
+    <entry key="next">Next Page</entry>
+    <entry key="previous">Previous Page</entry>
+    <entry key="sort">Sort By Name</entry>
+    <entry key="gender_option">All,Female,Male,Genderless,Unknown</entry>
+    <entry key="status_option">All,Alive,Dead,Unknown</entry>
+    <entry key="species_option">All,Human,Alien,Humanoid,Unknown,Poopybutthole,Mythological Creature,Animal,Robot,Cronenburg,Disease</entry>
+    <entry key="sort_option">Ascending,Descending</entry>
+</properties>
