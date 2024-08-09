@@ -67,6 +67,15 @@ public class CharacterController {
         DataFormatter.write(characters, format, out);
     }
 
+    /**
+     * Loads character data from a URL based on specified filters.
+     *
+     * @param name      the name of the character to filter by
+     * @param status    the status of the character (e.g., alive, dead, unknown)
+     * @param species   the species of the character
+     * @param gender    the gender of the character
+     * @param ascending whether the list should be sorted in ascending order
+     */
     public void loadURL(String name, String status, String species, String gender, boolean ascending) {
         try {
             character.loadURL(name, status, species, gender, ascending);
@@ -75,18 +84,46 @@ public class CharacterController {
         }
     }
 
+    /**
+     * Retrieves the URL of a character based on their page index.
+     *
+     * @param num the page of the character
+     * @return the URL as a string
+     */
     public String getURL(int num) {
         return character.getURL(num);
     }
 
-    public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
+    /**
+     * Loads a list of characters based on specified filters.
+     *
+     * @param name      the name of the character to filter by
+     * @param status    the status of the character (e.g., alive, dead)
+     * @param species   the species of the character
+     * @param gender    the gender of the character
+     * @param ascending whether the list should be sorted in ascending order
+     * @return a list of character records matching the filters
+     */
+    public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender,
+                                                           boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
     }
 
+    /**
+     * Retrieves the current list of character records.
+     *
+     * @return a list of current character records
+     */
     public List<ICharacter.CharacterRecord> getCharacterRecords() {
         return character.getCharacterRecords();
     }
 
+    /**
+     * Formats a single character record into a text representation.
+     *
+     * @param character the character record to be formatted
+     * @return the formatted character as a string
+     */
     public String txtPrint(ICharacter.CharacterRecord character) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -94,27 +131,53 @@ public class CharacterController {
         return baos.toString();
     }
 
+    /**
+     * Loads the characters on the current page.
+     *
+     * @param ascending whether the list should be sorted in ascending order
+     * @return a list of character records on the current page
+     */
     public List<ICharacter.CharacterRecord> loadCurrPage(boolean ascending) {
         return character.getCharByPage(ascending);
 
     }
 
+    /**
+     * Get the model component (which is the character class).
+     * @return the character instance
+     */
     public Character getModel() {
         return (Character) character;
     }
 
+    /**
+     * Retrieves the current page index.
+     *
+     * @return the current page index
+     */
     public int getCurrentPage() {
         return character.getCurrIndex();
     }
 
+    /**
+     * Increases the current page index, moving to the next page.
+     */
     public void increasePage() {
         character.increasePages();
     }
 
+    /**
+     * Decreases the current page index, moving to the previous page.
+     */
     public void decreasePage() {
         character.decreasePages();
     }
 
+    /**
+     * Sets the current page index the character model.
+     *
+     * @param page the page index to be set
+     */
     public void setPage(int page) {
         character.setCurrIndex(page);
     }

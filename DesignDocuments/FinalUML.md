@@ -10,21 +10,38 @@ classDiagram
     
     class Settings {
         -static Settings instance
-        -Properties prop
-        +CAPTION: String
-        +SEARCH: String
-        +GENDER: String
-        +STATUS: String
-        +SPECIES: String
-        +EXPORT: String
-        +SORT: String
-        +FONT: String
-        +FONT_SIZE: int
-        +GENDER_OPTION: String
-        +STATUS_OPTION: String
-        +SPECIES_OPTION: String
-        +SORT_OPTION: String
+        -prop Properties 
+        -String caption
+        -String search
+        -String gender
+        -String status
+        -String species
+        -String export
+        -String next
+        -String previous
+        -String sort
+        -String font
+        -int fontSize
+        -String genderOption
+        -String statusOption
+        -String speciesOption
+        -String sortOption
         -Settings()
+        +getCaption(): String
+        +getSearch(): String
+        +getGender(): String
+        +getStatus(): String
+        +getSpecies(): String
+        +getExport(): String
+        +getNext(): String
+        +getPrevious(): String
+        +getSort(): String
+        +getFont(): String
+        +getFontSize(): int
+        +getGenderOption(): String
+        +getStatusOption(): String
+        +getSpeciesOption(): String
+        +getSortOption(): String
         -setUIManager(): void
         -loadProperties(): void
         +getInstance(): Settings            
@@ -38,13 +55,21 @@ classDiagram
         -JTextField search_field
         -Button search_button
         -Button export_button
-        -JFileChooser file_chooser
-        -JPanel display_area
+        -Button nextButton
+        -Button previousButton
+        -JFileChooser fileChooser
+        -JPanel displayArea
+        -JPanel resultsPanel
+        -JScrollPane scrollPane
+        -JPanel prevNextPanel
         +JFrameView(CharacterController controller)
         +getInstance(CharacterController controller): JFrameView
         -createWindowAndButtons(): void
         -addComponents(): void
         +displayResults(List~ICharacter.CharacterRecord~): void
+        +toggleNextButton(boolean): void
+        +togglePrevButton(boolean): void
+        -resetScrollBar(): void
         +start(): void      
     }
 
@@ -59,10 +84,6 @@ classDiagram
         -JComboBox~String~ status_box
         -JComboBox~String~ species_box
         -JComboBox~String~ sort_box
-        -String selected_gender
-        -String selected_status
-        -String selected_species
-        -String selected_sort
         +Menu()
         +itemStateChanged(ItemEvent e): void
         +getGenderBox(): JComboBox~String~
@@ -75,13 +96,14 @@ classDiagram
     class Button {
         -CharacterController controller
         -ButtonType bt
-        -JTextField search_field
-        -JComboBox~String~ gender_box
-        -JComboBox~String~ status_box
-        -JComboBox~String~ species_box
-        -JComboBox~String~ sort_box
-        -int index
+        -JTextField searchField
+        -JComboBox~String~ genderBox
+        -JComboBox~String~ statusBox
+        -JComboBox~String~ speciesBox
+        -JComboBox~String~ sortBox
         +Button(ButtonType, CharacterController, JTextField, JComboBox~String~, JComboBox~String~, JComboBox~String~, JComboBox~String~)
+        -loadCharacters(): void
+        -displayChar(): void
     }    
     
     class ButtonType {
@@ -98,7 +120,7 @@ classDiagram
 
     
     class NetUtils{
-        -BASE_API_URL: String
+        -String BASE_API_URL 
         -NetUtils()
         +getCharacterUrl(String, String, String, String): String
         +getCharacterData(String): String
@@ -112,11 +134,17 @@ classDiagram
         -List~CharacterRecord~ characterRecords
         -List~String~ selectedURLs
         -int pages
+        -int currIndex
+        +getCurrIndex(): int
+        +setCurrIndex(int): void
+        +increasePages(): void
+        +decreasePages(): void
         +Character()
         +getCharacterRecords(): List~CharacterRecord~
         +loadCharacters(String, String, String, String, boolean): List~CharacterRecord~
+        +loadURL(String, String, String, String, boolean): void
         +getURL(int): String
-        +getPageNo(): int
+        +getCharByPage(boolean): List~CharacterRecord~
         +getImageIcon(CharacterRecord): ImageIcon
     }
     
@@ -124,8 +152,15 @@ classDiagram
     class ICharacter{
         <<INTERFACE>>
         CharacterRecord: record
+        +getCurrIndex(): int
+        +increasePages(): void
+        +decreasePages(): void
+        +setCurrIndex(int): void
         +loadCharacters(String, String, String, String, boolean): List~CharacterRecord~
         +getCharacterRecords(): List~CharacterRecord~
+        +loadURL(String, String, String, String, boolean): void
+        +getURL(int): String
+        +getCharByPage(boolean): List~CharacterRecord~
     }
     
     class DataFormatter{
@@ -138,7 +173,7 @@ classDiagram
         +write(@Nonnull Collection~CharacterRecord~, @Nonnull Formats, @Nonnull OutputStream) : void
     }
     
-    class DomainXMLWrapper{
+    class DomainXmlWrapper{
         -Collection~CharacterRecord~ domain
         +DomainXmlWrapper(Collection~CharacterRecord~)
     }
@@ -156,13 +191,20 @@ classDiagram
         -ICharacter character
         -Formats format
         -JFrameView view
-        +CharacterController(ICharacter character)
         +setView(JFrameView): void
+        +CharacterController(ICharacter character)
         +writeCharacters(List~ICharacter.CharacterRecord~, String, OutputStream): void
+        +loadURL(String, String, String, String, boolean): void
+        +getURL(int): String
         +loadCharacters(String, String, String, String, boolean): List~ICharacter.CharacterRecord~
         +getCharacterRecords(): List~ICharacter.CharacterRecord~
         +txtPrint(ICharacter.CharacterRecord): String
+        +loadCurrPage(boolean): List~ICharacter.CharacterRecord~
         +getModel(): Character
+        +getCurrentPage(): int
+        +increasePage(): void
+        +decreasePage(): void
+        +setPage(int): void
     }
     
     class CharacterRecord{

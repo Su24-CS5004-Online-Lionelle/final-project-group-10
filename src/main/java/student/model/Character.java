@@ -71,12 +71,18 @@ public class Character implements ICharacter {
     }
 
     /**
-     * Contructor.
+     * Constructor.
      */
     public Character() {
         // empty for now
     }
 
+
+    /**
+     * Get characters.
+     *
+     * @return a list of CharacterRecords
+     */
     @Override
     public List<CharacterRecord> getCharacterRecords() {
         return characterRecords;
@@ -87,7 +93,8 @@ public class Character implements ICharacter {
      * The records will be filtered and sorted based on the given parameters.
      * The records will be stored in the characterRecords field.
      * If the API returns an empty list, characterRecords will be set to an empty list.
-     * If there is more than one page of results, the method will continue to load the next page until there are no more pages.
+     * If there is more than one page of results, the method will continue
+     * to load the next page until there are no more pages.
      * Throws a RuntimeException if there is an IOException.
      * Throws an InterruptedException if the thread is interrupted.
      *
@@ -98,11 +105,15 @@ public class Character implements ICharacter {
      * @param ascending true if the records should be sorted in ascending order, false otherwise.
      */
     @Override
-    public List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
+    public List<CharacterRecord> loadCharacters(String name, String status, String species, String gender,
+                                                boolean ascending) {
         try {
             List<CharacterRecord> characters = new ArrayList<>();
             for (String url : this.selectedURLs) {
                 String response = NetUtils.getCharacterData(url);
+                if (response.contains("There is nothing")) {
+                    return characters;
+                }
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootNode = mapper.readTree(response);
                 JsonNode infoNode = rootNode.path("results");
@@ -139,6 +150,15 @@ public class Character implements ICharacter {
         return characterRecords;
     }
 
+    /**
+     * Load urls based on searching criteria.
+     *
+     * @param name      Searched name
+     * @param status    Searched status
+     * @param species   Searched species
+     * @param gender    Searched gender
+     * @param ascending Sorting criterion
+     */
     @Override
     public void loadURL(String name, String status, String species, String gender, boolean ascending) {
         try {
@@ -177,12 +197,21 @@ public class Character implements ICharacter {
     }
 
 
+    /**
+     * Get the characterRecords on the current page, in ascending or descending order.
+     *
+     * @param ascending The order.
+     * @return A list of characterRecords based on the input order.
+     */
     @Override
     public List<CharacterRecord> getCharByPage(boolean ascending) {
         String currUrl = this.getURL(currIndex);
         List<CharacterRecord> characters = new ArrayList<>();
         try {
             String response = NetUtils.getCharacterData(currUrl);
+            if (response.contains("There is nothing")) {
+                return characters;
+            }
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(response);
             JsonNode infoNode = rootNode.path("results");

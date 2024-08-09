@@ -1,6 +1,7 @@
 package student.view;
 
 import javax.swing.*;
+
 import student.Settings;
 import student.controller.CharacterController;
 import student.model.ICharacter;
@@ -14,41 +15,68 @@ import java.util.List;
  * Implements the IView interface.
  */
 public class JFrameView extends JFrame implements IView {
-    /** The instance of the JFrameView. */
+    /**
+     * The instance of the JFrameView.
+     */
     private static JFrameView instance;
     /**
      * The Setting object for the application.
      * Used to get information like font, font size, and String properties for Buttons and JLabels.
      */
     private static final Settings SETTINGS = Settings.getInstance();
-    /** Tbe controller for the application. */
+    /**
+     * Tbe controller for the application.
+     */
     private CharacterController controller;
-    /** Dropdown boxes for the filters. */
+    /**
+     * Dropdown boxes for the filters.
+     */
     private Menu menu;
-    /** The search bar for the user to input a character name to search. */
+    /**
+     * The search bar for the user to input a character name to search.
+     */
     private JTextField searchField;
-    /** The search button to search for a character. */
+    /**
+     * The search button to search for a character.
+     */
     private Button searchButton;
-    /** The export file button to export search results to a file. */
+    /**
+     * The export file button to export search results to a file.
+     */
     private Button exportButton;
-    /** The next button for the next page of results. */
+    /**
+     * The next button for the next page of results.
+     */
     private Button nextButton;
-    /** The previous button for the previous page of results. */
+    /**
+     * The previous button for the previous page of results.
+     */
     private Button previousButton;
-    /** The file chooser to save files. */
+    /**
+     * The file chooser to save files.
+     */
     private JFileChooser fileChooser;
-    /** The JPanel to display the search resuts. */
+    /**
+     * The JPanel to display the search resuts.
+     */
     private JPanel displayArea;
-    /** The JPanel that holds the display area and next and previous buttons. */
+    /**
+     * The JPanel that holds the display area and next and previous buttons.
+     */
     private JPanel resultsPanel;
-    /** Scrollpane for the display area to scroll through results. */
+    /**
+     * Scrollpane for the display area to scroll through results.
+     */
     private JScrollPane scrollPane;
-    /** The JPanel that holds the next and previous buttons. */
+    /**
+     * The JPanel that holds the next and previous buttons.
+     */
     private JPanel prevNextPanel;
 
-    /** Constructor for the JFrameView class.
+    /**
+     * Constructor for the JFrameView class.
      * Intializes the JFrame with the controller.
-     * 
+     *
      * @param controller the controller for the application.
      */
     public JFrameView(CharacterController controller) {
@@ -67,7 +95,7 @@ public class JFrameView extends JFrame implements IView {
 
     /**
      * Getter method to retrieve an instance of the JFrameView class.
-     * 
+     *
      * @param controller the controller for the application.
      * @return the instance of the JFrameView.
      */
@@ -80,9 +108,10 @@ public class JFrameView extends JFrame implements IView {
 
     /**
      * Creates the buttons, menus, and display area for the JFrame.
+     *
      * @see Button#Button()
      * @see ButtonListener#actionPerformed(ActionEvent e)
-    */
+     */
     private void createWindowAndButtons() {
         searchField = new JTextField(24);
         displayArea = new JPanel();
@@ -110,8 +139,9 @@ public class JFrameView extends JFrame implements IView {
 
     /**
      * Create JPanels and adds the buttons, menus, and display area to the respective panels.
+     *
      * @see Menu#Menu()
-    */
+     */
     private void addComponents() {
         setLayout(new BorderLayout());
         JPanel northPanel = new JPanel(new GridLayout(5, 2, 0, 0));
@@ -154,30 +184,39 @@ public class JFrameView extends JFrame implements IView {
     }
 
     /**
-     * 
      * @param characters
      */
     public void displayResults(List<ICharacter.CharacterRecord> characters) {
         displayArea.removeAll();
-        for (ICharacter.CharacterRecord character : characters) {
-            JPanel characterPanel = new JPanel();
-            characterPanel.setLayout(new BoxLayout(characterPanel, BoxLayout.X_AXIS));
-            characterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        if (characters.isEmpty()) {
+            JTextArea errorArea = new JTextArea();
+            errorArea.setEditable(false);
+            errorArea.setBackground(getBackground());
+            errorArea.setLineWrap(true);
+            errorArea.setText("                            No Results Found."
+                    + "\n                            Please try again.");
+            displayArea.add(errorArea);
+        } else {
+            for (ICharacter.CharacterRecord character : characters) {
+                JPanel characterPanel = new JPanel();
+                characterPanel.setLayout(new BoxLayout(characterPanel, BoxLayout.X_AXIS));
+                characterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-            JLabel imageLabel = new JLabel(controller.getModel().getImageIcon(character));
-            imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+                JLabel imageLabel = new JLabel(controller.getModel().getImageIcon(character));
+                imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
 
-            JTextArea textArea = new JTextArea();
-            textArea.setEditable(false);
-            textArea.setBackground(getBackground());
-            textArea.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+                JTextArea textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setBackground(getBackground());
+                textArea.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 
-            String textResults = controller.txtPrint(character);
-            textArea.setText(textResults);
+                String textResults = controller.txtPrint(character);
+                textArea.setText(textResults);
 
-            characterPanel.add(imageLabel);
-            characterPanel.add(textArea);
-            displayArea.add(characterPanel);
+                characterPanel.add(imageLabel);
+                characterPanel.add(textArea);
+                displayArea.add(characterPanel);
+            }
         }
         displayArea.revalidate();
         displayArea.repaint();
@@ -187,7 +226,7 @@ public class JFrameView extends JFrame implements IView {
 
     /**
      * Set the next button to be visible if there is a next page to load.
-     * 
+     *
      * @param hasNext a boolean value, returns true if there is a next page to load, false otherwise
      */
     public void toggleNextButton(boolean hasNext) {
@@ -198,7 +237,7 @@ public class JFrameView extends JFrame implements IView {
 
     /**
      * Set the previous button to be visible if there is a previous page to load.
-     * 
+     *
      * @param hasPrev boolean, returns true if there is a previous page to load, false otherwise
      */
     public void togglePrevButton(boolean hasPrev) {
@@ -207,12 +246,16 @@ public class JFrameView extends JFrame implements IView {
         prevNextPanel.repaint();
     }
 
-    /** Resets the scrollbar to the top. */
+    /**
+     * Resets the scrollbar to the top.
+     */
     private void resetScrollBar() {
         scrollPane.getVerticalScrollBar().setValue(0);
     }
 
-    /** Starts the JFrameView. */
+    /**
+     * Starts the JFrameView.
+     */
     @Override
     public void start() {
         setVisible(true);

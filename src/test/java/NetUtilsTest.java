@@ -1,12 +1,21 @@
-
 import student.model.util.NetUtils;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 
+/**
+ * Tests for the NetUtils class that interacts with the Rick and Morty API.
+ * Contains various test cases to ensure the functionality of
+ * constructing URLs and retrieving data based on different input parameters.
+ */
 public class NetUtilsTest {
 
+    /**
+     * Tests if the getCharacterUrl method correctly constructs the URL
+     * with given character details.
+     * Asserts that the resultant URL is not null and matches the expected format.
+     */
     @Test
     public void testGetCharacterUrl() {
         try {
@@ -26,6 +35,11 @@ public class NetUtilsTest {
         }
     }
 
+    /**
+     * Tests if the getCharacterUrl method handles null name input
+     * Asserts that the resultant URL is not null 
+     * and conforms to expected structure when name is omitted.
+     */
     @Test
     public void testGetCharacterUrlWithNullName() {
         try {
@@ -37,6 +51,11 @@ public class NetUtilsTest {
         }
     }
 
+    /**
+     * Tests the URL construction with an invalid character name.
+     * Asserts that the method does not throw an exception 
+     * and the URL includes the invalid name.
+     */
     @Test
     public void testGetCharacterUrlWithInvalidName() {
         try {
@@ -47,6 +66,10 @@ public class NetUtilsTest {
         }
     }
 
+    /**
+     * Performance test for the getCharacterUrl method.
+     * Measures the execution time to ensure it completes within a specified time frame.
+     */
     @Test
     public void testGetCharacterUrlPerformance() {
         long startTime = System.currentTimeMillis();
@@ -59,6 +82,10 @@ public class NetUtilsTest {
         assertTrue(endTime - startTime < 1000);
     }
 
+    /**
+     * Tests the retrieval of character data from the API.
+     * Asserts that the data contains expected fields and values based on the input parameters.
+     */
     @Test
     public void testGetCharacterData() {
         try {
@@ -76,6 +103,10 @@ public class NetUtilsTest {
         }
     }
     
+    /**
+     * Tests if the getCharacterData method can handle an invalid URL.
+     * Asserts that no exception is thrown and the response contains error information.
+     */
     @Test
     public void testGetCharacterDataInvalidUrl() {
         try {
