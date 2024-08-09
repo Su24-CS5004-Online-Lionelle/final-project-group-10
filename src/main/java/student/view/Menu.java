@@ -15,13 +15,13 @@ public class Menu extends JFrame implements ItemListener {
     /**An instance of the application settings.*/
     private static final Settings SETTINGS = Settings.getInstance();
     /**ComboBox for selecting gender options.*/
-    static JComboBox<String> gender_box;
+    private static JComboBox<String> genderBox;
      /**ComboBox for selecting status options.*/
-    static JComboBox<String> status_box;
+    private static JComboBox<String> statusBOX;
     /**ComboBox for selecting species options.*/
-    static JComboBox<String> species_box;
+    private static JComboBox<String> speciesBOX;
     /**ComboBox for selecting sort options.*/
-    static JComboBox<String> sort_box;
+    private static JComboBox<String> sortBOX;
 
     /**
      * Constructs a new `Menu` object, initializing the UI components based on
@@ -33,15 +33,15 @@ public class Menu extends JFrame implements ItemListener {
         String[] species = SETTINGS.getSpeciesOption().split(",");
         String[] sorts = SETTINGS.getSortOption().split(",");
 
-        gender_box = new JComboBox<>(genders);
-        status_box = new JComboBox<>(statuses);
-        species_box = new JComboBox<>(species);
-        sort_box = new JComboBox<>(sorts);
+        genderBox = new JComboBox<>(genders);
+        statusBOX = new JComboBox<>(statuses);
+        speciesBOX = new JComboBox<>(species);
+        sortBOX = new JComboBox<>(sorts);
 
-        gender_box.addItemListener(this);
-        status_box.addItemListener(this);
-        species_box.addItemListener(this);
-        sort_box.addItemListener(this);
+        genderBox.addItemListener(this);
+        statusBOX.addItemListener(this);
+        speciesBOX.addItemListener(this);
+        sortBOX.addItemListener(this);
     }
 
 
@@ -63,7 +63,7 @@ public class Menu extends JFrame implements ItemListener {
      * @return the combo box for gender selection
      */
     public JComboBox<String> getGenderBox() {
-        return gender_box;
+        return genderBox;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Menu extends JFrame implements ItemListener {
      * @return the combo box for status selection
      */
     public JComboBox<String> getStatusBox() {
-        return status_box;
+        return statusBOX;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Menu extends JFrame implements ItemListener {
      * @return the combo box for species selection
      */
     public JComboBox<String> getSpeciesBox() {
-        return species_box;
+        return speciesBOX;
     }
 
     /**
@@ -90,7 +90,7 @@ public class Menu extends JFrame implements ItemListener {
      * @return the combo box for sort selection
      */
     public JComboBox<String> getSortBox() {
-        return sort_box;
+        return sortBOX;
     }
     
 }
