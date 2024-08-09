@@ -145,6 +145,7 @@ public class Button extends JButton {
                             ex.printStackTrace();
                         }
                     }
+                    break;
 
                 case NEXT:
                     controller.increasePage();
