@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class DataFormatterTest {
 
+    /** List of CharacterRecords to use for testing. */
     private List<CharacterRecord> characters;
 
     /**
