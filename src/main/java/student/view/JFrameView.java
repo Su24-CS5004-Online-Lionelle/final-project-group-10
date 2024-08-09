@@ -193,8 +193,8 @@ public class JFrameView extends JFrame implements IView {
             errorArea.setEditable(false);
             errorArea.setBackground(getBackground());
             errorArea.setLineWrap(true);
-            errorArea.setText("                            No Results Found." +
-                    "\n                            Please try again.");
+            errorArea.setText("                            No Results Found."
+                    + "\n                            Please try again.");
             displayArea.add(errorArea);
         } else {
             for (ICharacter.CharacterRecord character : characters) {
