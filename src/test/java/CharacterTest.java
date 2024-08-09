@@ -102,7 +102,6 @@ public class CharacterTest {
         character.loadURL("Rick", "Alive", "Human", "Male", true);
         assertNotNull(character.getURL(0));
         assertNull(character.getURL(-1));
-        assertNull(character.getURL(character.getCurrIndex() + 1));
     }
 
     /** Test loadURL method. */

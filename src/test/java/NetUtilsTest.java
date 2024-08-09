@@ -60,7 +60,8 @@ public class NetUtilsTest {
     public void testGetCharacterUrlWithInvalidName() {
         try {
             String result = NetUtils.getCharacterUrl("InvalidName", "Alive", "Human", "Male");
-            assertEquals("https://rickandmortyapi.com/api/character/?name=InvalidName&status=Alive&species=Human&gender=Male", result);
+            assertEquals("https://rickandmortyapi.com/api/character/?name=InvalidName"
+                                   + "&status=Alive&species=Human&gender=Male", result);
         } catch (IOException | InterruptedException e) {
             fail("Exception should not be thrown for invalid names.");
         }
