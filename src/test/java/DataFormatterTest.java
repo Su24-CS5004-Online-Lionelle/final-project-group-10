@@ -10,10 +10,20 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tests for DataFormatter class.
+ * Contains tests that verify the functionality of formatting data into 
+ * different formats, such as text, XML, and CSV 
+ * based on a list of CharacterRecords.
+ */
 public class DataFormatterTest {
 
     private List<CharacterRecord> characters;
 
+    /**
+     * Sets up the test environment before each test method
+     * Initializes a list of CharacterRecords with sample data to be used in the tests.
+     */
     @BeforeEach
     public void setUp() {
         characters = new ArrayList<>();
@@ -21,6 +31,9 @@ public class DataFormatterTest {
         characters.add(new CharacterRecord(2, "Morty Smith", "Alive", "Human", "Male", "imageURL"));
     }
 
+    /**
+     * Tests the txtPrint method.
+     */
     @Test
     public void testTxtPrint() {
         OutputStream out = new ByteArrayOutputStream();
@@ -32,6 +45,9 @@ public class DataFormatterTest {
         assertTrue(output.contains("Gender: Male"));
     }
 
+    /**
+     * Tests the writeXmlData method.
+     */
     @Test
     public void testWriteXmlData() {
         OutputStream out = new ByteArrayOutputStream();
@@ -44,7 +60,9 @@ public class DataFormatterTest {
         assertTrue(output.contains("<gender>Male</gender>"));
     }
 
-
+    /**
+     * Tests the writeCSVData method.
+     */
     @Test
     public void testWriteCSVData() {
         OutputStream out = new ByteArrayOutputStream();
