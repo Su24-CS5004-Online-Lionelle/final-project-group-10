@@ -120,7 +120,7 @@ classDiagram
 
     
     class NetUtils{
-        -BASE_API_URL: String
+        -String BASE_API_URL 
         -NetUtils()
         +getCharacterUrl(String, String, String, String): String
         +getCharacterData(String): String
@@ -134,11 +134,17 @@ classDiagram
         -List~CharacterRecord~ characterRecords
         -List~String~ selectedURLs
         -int pages
+        -int currIndex
+        +getCurrIndex(): int
+        +setCurrIndex(int): void
+        +increasePages(): void
+        +decreasePages(): void
         +Character()
         +getCharacterRecords(): List~CharacterRecord~
         +loadCharacters(String, String, String, String, boolean): List~CharacterRecord~
+        +loadURL(String, String, String, String, boolean): void
         +getURL(int): String
-        +getPageNo(): int
+        +getCharByPage(boolean): List~CharacterRecord~
         +getImageIcon(CharacterRecord): ImageIcon
     }
     
@@ -146,8 +152,15 @@ classDiagram
     class ICharacter{
         <<INTERFACE>>
         CharacterRecord: record
+        +getCurrIndex(): int
+        +increasePages(): void
+        +decreasePages(): void
+        +setCurrIndex(int): void
         +loadCharacters(String, String, String, String, boolean): List~CharacterRecord~
         +getCharacterRecords(): List~CharacterRecord~
+        +loadURL(String, String, String, String, boolean): void
+        +getURL(int): String
+        +getCharByPage(boolean): List~CharacterRecord~
     }
     
     class DataFormatter{
@@ -160,7 +173,7 @@ classDiagram
         +write(@Nonnull Collection~CharacterRecord~, @Nonnull Formats, @Nonnull OutputStream) : void
     }
     
-    class DomainXMLWrapper{
+    class DomainXmlWrapper{
         -Collection~CharacterRecord~ domain
         +DomainXmlWrapper(Collection~CharacterRecord~)
     }
@@ -178,13 +191,20 @@ classDiagram
         -ICharacter character
         -Formats format
         -JFrameView view
-        +CharacterController(ICharacter character)
         +setView(JFrameView): void
+        +CharacterController(ICharacter character)
         +writeCharacters(List~ICharacter.CharacterRecord~, String, OutputStream): void
+        +loadURL(String, String, String, String, boolean): void
+        +getURL(int): String
         +loadCharacters(String, String, String, String, boolean): List~ICharacter.CharacterRecord~
         +getCharacterRecords(): List~ICharacter.CharacterRecord~
         +txtPrint(ICharacter.CharacterRecord): String
+        +loadCurrPage(boolean): List~ICharacter.CharacterRecord~
         +getModel(): Character
+        +getCurrentPage(): int
+        +increasePage(): void
+        +decreasePage(): void
+        +setPage(int): void
     }
     
     class CharacterRecord{
