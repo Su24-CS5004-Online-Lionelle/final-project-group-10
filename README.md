@@ -2,9 +2,9 @@
 
 Group Members:
 * Grace Chong: [Personal Github](https://github.com/hey-sj)
-* Xiaotong Li: [Personal Github]()
-* Tianyuan Yan: [Personal Github]()
-* Xiwei Li: [Personal Github]()
+* Xiaotong Li: [Personal Github](ADD LINK)
+* Tianyuan Yan: [Personal Github](ADD LINK)
+* Xiwei Li: [Personal Github](ADD LINK)
 
 ### Rick and Morty Character Search
 
