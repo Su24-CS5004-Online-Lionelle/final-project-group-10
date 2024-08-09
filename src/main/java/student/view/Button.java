@@ -74,7 +74,7 @@ public class Button extends JButton {
     /**
      * Creates the action listeners for each button type,
      * search, export, next, and previous.
-     * The search button will load the characters and display them.
+     * The search button will load the characters and display the first page of the results.
      * The export button will save the characters to a file.
      * The next button will display the next page of characters, if there is one.
      * The previous button will display the previous page of characters, if there is one.
