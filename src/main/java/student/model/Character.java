@@ -71,12 +71,18 @@ public class Character implements ICharacter {
     }
 
     /**
-     * Contructor.
+     * Constructor.
      */
     public Character() {
         // empty for now
     }
 
+
+    /**
+     * Get characters.
+     *
+     * @return a list of CharacterRecords
+     */
     @Override
     public List<CharacterRecord> getCharacterRecords() {
         return characterRecords;
