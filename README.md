@@ -22,7 +22,7 @@ Here are also our design documents and the GUI testing history.
 
 * [Initial UML Diagram](https://github.com/Su24-CS5004-Online-Lionelle/final-project-group-10/blob/main/DesignDocuments/InitialUML.md)
 * [Final UML Diagram](https://github.com/Su24-CS5004-Online-Lionelle/final-project-group-10/blob/main/DesignDocuments/FinalUML.md)
-* [GUI Testing History](Add link after merging branches)
+* [GUI Testing History](https://github.com/Su24-CS5004-Online-Lionelle/final-project-group-10/blob/main/Manual/GUITestingHistory.md)
 
 ### Running the Program
 
