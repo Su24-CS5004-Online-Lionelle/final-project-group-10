@@ -104,7 +104,8 @@ public class CharacterController {
      * @param ascending whether the list should be sorted in ascending order
      * @return a list of character records matching the filters
      */
-    public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
+    public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender,
+                                                           boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
     }
 
@@ -141,7 +142,10 @@ public class CharacterController {
 
     }
 
-
+    /**
+     * Get the model component (which is the character class).
+     * @return the character instance
+     */
     public Character getModel() {
         return (Character) character;
     }

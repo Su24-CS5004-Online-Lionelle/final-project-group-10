@@ -79,7 +79,7 @@ public class Button extends JButton {
      * The next button will display the next page of characters, if there is one.
      * The previous button will display the previous page of characters, if there is one.
      */
-    private class ButtonListener implements ActionListener {
+    private final class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             switch (bt) {
                 case SEARCH:

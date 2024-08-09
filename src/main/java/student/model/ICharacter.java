@@ -41,7 +41,8 @@ public interface ICharacter {
      * The records will be filtered and sorted based on the given parameters.
      * The records will be stored in the characterRecords field.
      * If the API returns an empty list, characterRecords will be set to an empty list.
-     * If there is more than one page of results, the method will continue to load the next page until there are no more pages.
+     * If there is more than one page of results, the method will continue to load the next page until
+     * there are no more pages.
      * Throws a RuntimeException if there is an IOException.
      * Throws an InterruptedException if the thread is interrupted.
      *
@@ -50,6 +51,8 @@ public interface ICharacter {
      * @param species   the species of the character
      * @param gender    the gender of the character
      * @param ascending true if the records should be sorted in ascending order, false otherwise.
+     * @return a list of CharacterRecords
+     *
      */
     List<CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending);
 
@@ -79,6 +82,12 @@ public interface ICharacter {
      */
     String getURL(int num);
 
+    /**
+     * Get the characterRecords on the current page, in ascending or descending order.
+     *
+     * @param ascending The order.
+     * @return A list of characterRecords based on the input order.
+     */
     List<CharacterRecord> getCharByPage(boolean ascending);
 
     /**
