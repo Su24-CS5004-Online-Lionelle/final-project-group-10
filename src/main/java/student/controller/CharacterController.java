@@ -106,6 +106,7 @@ public class CharacterController {
      */
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender,
                                                            boolean ascending) {
+        character.loadURL(name, status, species, gender, ascending);
         return character.loadCharacters(name, status, species, gender, ascending);
     }
 

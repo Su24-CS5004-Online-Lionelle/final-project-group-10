@@ -67,6 +67,7 @@ class CharacterControllerTest {
     @Test
     void testLoadCharacters() {
         // Assuming the character model has some characters loaded for the test
+
         List<CharacterRecord> loadedCharacters = controller.loadCharacters("Rick", "Alive", "Human", "Male", true);
         assertNotNull(loadedCharacters);
         assertFalse(loadedCharacters.isEmpty());
