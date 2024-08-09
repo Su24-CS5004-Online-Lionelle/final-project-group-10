@@ -94,14 +94,35 @@ public class CharacterController {
         return character.getURL(num);
     }
 
+    /**
+     * Loads a list of characters based on specified filters.
+     *
+     * @param name      the name of the character to filter by
+     * @param status    the status of the character (e.g., alive, dead)
+     * @param species   the species of the character
+     * @param gender    the gender of the character
+     * @param ascending whether the list should be sorted in ascending order
+     * @return a list of character records matching the filters
+     */
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender, boolean ascending) {
         return character.loadCharacters(name, status, species, gender, ascending);
     }
 
+    /**
+     * Retrieves the current list of character records.
+     *
+     * @return a list of current character records
+     */
     public List<ICharacter.CharacterRecord> getCharacterRecords() {
         return character.getCharacterRecords();
     }
 
+    /**
+     * Formats a single character record into a text representation.
+     *
+     * @param character the character record to be formatted
+     * @return the formatted character as a string
+     */
     public String txtPrint(ICharacter.CharacterRecord character) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -109,27 +130,50 @@ public class CharacterController {
         return baos.toString();
     }
 
+    /**
+     * Loads the characters on the current page.
+     *
+     * @param ascending whether the list should be sorted in ascending order
+     * @return a list of character records on the current page
+     */
     public List<ICharacter.CharacterRecord> loadCurrPage(boolean ascending) {
         return character.getCharByPage(ascending);
 
     }
 
+
     public Character getModel() {
         return (Character) character;
     }
 
+    /**
+     * Retrieves the current page index.
+     *
+     * @return the current page index
+     */
     public int getCurrentPage() {
         return character.getCurrIndex();
     }
 
+    /**
+     * Increases the current page index, moving to the next page.
+     */
     public void increasePage() {
         character.increasePages();
     }
 
+    /**
+     * Decreases the current page index, moving to the previous page.
+     */
     public void decreasePage() {
         character.decreasePages();
     }
 
+    /**
+     * Sets the current page index the character model.
+     *
+     * @param page the page index to be set
+     */
     public void setPage(int page) {
         character.setCurrIndex(page);
     }
