@@ -10,21 +10,38 @@ classDiagram
     
     class Settings {
         -static Settings instance
-        -Properties prop
-        +CAPTION: String
-        +SEARCH: String
-        +GENDER: String
-        +STATUS: String
-        +SPECIES: String
-        +EXPORT: String
-        +SORT: String
-        +FONT: String
-        +FONT_SIZE: int
-        +GENDER_OPTION: String
-        +STATUS_OPTION: String
-        +SPECIES_OPTION: String
-        +SORT_OPTION: String
+        -prop Properties 
+        -caption: String
+        -search: String
+        -gender: String
+        -status: String
+        -species: String
+        -export: String
+        -next: String
+        -previous: String
+        -sort: String
+        -font: String
+        -fontSize: int
+        -genderOption: String
+        -statusOption: String
+        -speciesOption: String
+        -sortOption: String
         -Settings()
+        +getCaption(): String
+        +getSearch(): String
+        +getGender(): String
+        +getStatus(): String
+        +getSpecies(): String
+        +getExport(): String
+        +getNext(): String
+        +getPrevious(): String
+        +getSort(): String
+        +getFont(): String
+        +getFontSize(): int
+        +getGenderOption(): String
+        +getStatusOption(): String
+        +getSpeciesOption(): String
+        +getSortOption(): String
         -setUIManager(): void
         -loadProperties(): void
         +getInstance(): Settings            
