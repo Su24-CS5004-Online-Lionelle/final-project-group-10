@@ -1,7 +1,5 @@
 # Manual 
 
-You will update this manual and add any files here that you need for an 'application' manual for your program. Make sure to include screenshots of various features. 
-
 We created a GUI interacting with the **character schema** from this [Rick and Morty Character API](https://rickandmortyapi.com/) to return information about characters from the show Rick and Morty. This API allows us to look up information about each character, such as their name, status, species, last known location, and so forth. We created filters for character searches including their name, status, species, and gender. This API seems to be up-to-date with the 51st episode of the show. You can learn more about the character schema by looking at [the corresponding API documentation](https://rickandmortyapi.com/documentation/#character-schema). 
 
 ### Overview
