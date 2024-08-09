@@ -56,6 +56,8 @@ Select "Descending" in Sort By Name.
 
 ### Test search criteria with no matching characters properly returns no search found message.
 
+<img width="595" alt="Screenshot 2024-08-09 at 00 07 50" src="https://github.com/user-attachments/assets/09f73a3a-1143-419b-8010-6aff0440a0eb">
+
 ### Test export
 
 <img width="599" alt="Screenshot 2024-08-08 at 21 37 04" src="https://github.com/user-attachments/assets/aa768a29-8dea-4a02-803d-1a0fe5d170bd">
