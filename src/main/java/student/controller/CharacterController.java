@@ -114,4 +114,8 @@ public class CharacterController {
     public void decreasePage() {
         character.decreasePages();
     }
+
+    public void setPage(int page) {
+        character.setCurrIndex(page);
+    }
 }

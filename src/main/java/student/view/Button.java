@@ -84,6 +84,7 @@ public class Button extends JButton {
             switch (bt) {
                 case SEARCH:
                     loadCharacters();
+                    controller.setPage(0);
                     displayChar();
                     break;
 
