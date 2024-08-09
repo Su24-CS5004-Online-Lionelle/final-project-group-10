@@ -11,21 +11,21 @@ classDiagram
     class Settings {
         -static Settings instance
         -prop Properties 
-        -caption: String
-        -search: String
-        -gender: String
-        -status: String
-        -species: String
-        -export: String
-        -next: String
-        -previous: String
-        -sort: String
-        -font: String
-        -fontSize: int
-        -genderOption: String
-        -statusOption: String
-        -speciesOption: String
-        -sortOption: String
+        -String caption
+        -String search
+        -String gender
+        -String status
+        -String species
+        -String export
+        -String next
+        -String previous
+        -String sort
+        -String font
+        -int fontSize
+        -String genderOption
+        -String statusOption
+        -String speciesOption
+        -String sortOption
         -Settings()
         +getCaption(): String
         +getSearch(): String
@@ -55,13 +55,21 @@ classDiagram
         -JTextField search_field
         -Button search_button
         -Button export_button
-        -JFileChooser file_chooser
-        -JPanel display_area
+        -Button nextButton
+        -Button previousButton
+        -JFileChooser fileChooser
+        -JPanel displayArea
+        -JPanel resultsPanel
+        -JScrollPane scrollPane
+        -JPanel prevNextPanel
         +JFrameView(CharacterController controller)
         +getInstance(CharacterController controller): JFrameView
         -createWindowAndButtons(): void
         -addComponents(): void
         +displayResults(List~ICharacter.CharacterRecord~): void
+        +toggleNextButton(boolean): void
+        +togglePrevButton(boolean): void
+        -resetScrollBar(): void
         +start(): void      
     }
 
@@ -76,10 +84,6 @@ classDiagram
         -JComboBox~String~ status_box
         -JComboBox~String~ species_box
         -JComboBox~String~ sort_box
-        -String selected_gender
-        -String selected_status
-        -String selected_species
-        -String selected_sort
         +Menu()
         +itemStateChanged(ItemEvent e): void
         +getGenderBox(): JComboBox~String~
@@ -92,13 +96,14 @@ classDiagram
     class Button {
         -CharacterController controller
         -ButtonType bt
-        -JTextField search_field
-        -JComboBox~String~ gender_box
-        -JComboBox~String~ status_box
-        -JComboBox~String~ species_box
-        -JComboBox~String~ sort_box
-        -int index
+        -JTextField searchField
+        -JComboBox~String~ genderBox
+        -JComboBox~String~ statusBox
+        -JComboBox~String~ speciesBox
+        -JComboBox~String~ sortBox
         +Button(ButtonType, CharacterController, JTextField, JComboBox~String~, JComboBox~String~, JComboBox~String~, JComboBox~String~)
+        -loadCharacters(): void
+        -displayChar(): void
     }    
     
     class ButtonType {
