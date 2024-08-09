@@ -126,24 +126,6 @@ public class Character implements ICharacter {
                         });
                 characters.addAll(pageRecords);
             }
-//            String nextUrl = NetUtils.getCharacterUrl(name, status, species, gender);
-//
-//            while (nextUrl != null) {
-//                String response = NetUtils.getCharacterData(nextUrl);
-//                ObjectMapper mapper = new ObjectMapper();
-//                JsonNode rootNode = mapper.readTree(response);
-//                JsonNode infoNode = rootNode.path("results");
-//                if (Objects.isNull(infoNode) || infoNode.isEmpty()) {
-//                    break;
-//                }
-//
-//                List<CharacterRecord> pageRecords = mapper.readValue(infoNode.toString(),
-//                        new TypeReference<List<CharacterRecord>>() {
-//                        });
-//                characters.addAll(pageRecords);
-//                nextUrl = rootNode.path("info").path("next").asText(null);
-//            }
-
             characterRecords = new Sorter().sort(characters.stream(), ascending).collect(Collectors.toList());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
