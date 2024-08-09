@@ -4,7 +4,7 @@ Group Members:
 * Grace Chong: [Personal Github](https://github.com/hey-sj)
 * Xiaotong Li: [Personal Github](https://github.com/Lxsong77)
 * Tianyuan Yan: [Personal Github](https://github.com/JerryYanTY)
-* Xiwei Li: [Personal Github](https://github.com/xiwei22)
+* Xiwei Li: [Personal Github](ADD LINK)
 
 ### Rick and Morty Character Search
 
@@ -23,3 +23,30 @@ Here are also our design documents and the GUI testing history.
 * [Initial UML Diagram](https://github.com/Su24-CS5004-Online-Lionelle/final-project-group-10/blob/main/DesignDocuments/InitialUML.md)
 * [Final UML Diagram](https://github.com/Su24-CS5004-Online-Lionelle/final-project-group-10/blob/main/DesignDocuments/FinalUML.md)
 * [GUI Testing History](Add link after merging branches)
+
+### Running the Program
+
+```java
+// build the project using gradle.
+./gradlew build
+
+// run the application
+./gradlew run
+```
+
+### Features
+
+Required Features
+
+* GUI: Java swing/awt JFrame
+* view all items in a logical order: view all character records, page by page, with each page's results in alphabetical order. default is ascending alphabetical, but user can toggle to descending.
+* build out a list from the collection: user can search for characters and save out the search results.
+* save out the list: user is able to save out list to .xml, .json, and .csv file formats.
+
+Additional Features
+
+* be able to search for items in the collection: user can search for characters by name. all characters whose name fields contain the name that the user searches for are included in the records.
+* sort items in the collection: sort search results by name alphabetically, ascending and descending.
+* filter items: filter search results by gender, status, and species.
+* have original item list come from an online API/online access: use the aforementioned Rick and Morty API's character schema.
+* include images for your items: search results generate an image for each character. 
