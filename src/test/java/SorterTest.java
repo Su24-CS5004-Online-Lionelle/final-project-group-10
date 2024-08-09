@@ -96,6 +96,7 @@ public class SorterTest {
             new CharacterRecord(2, "Summer", "Alive", "Human", "Female", "url7")
         );
         List<CharacterRecord> sorted = sorter.sort(characters.stream(), true).collect(Collectors.toList());
-        assertTrue(sorted.get(0).image().equals("url6") && sorted.get(1).image().equals("url7"), "Sort should maintain original order of elements with the same name");
+        assertTrue(sorted.get(0).image().equals("url6")
+        && sorted.get(1).image().equals("url7"), "Sort should maintain original order of elements with the same name");
     }
 }
