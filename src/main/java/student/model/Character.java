@@ -111,6 +111,9 @@ public class Character implements ICharacter {
             List<CharacterRecord> characters = new ArrayList<>();
             for (String url : this.selectedURLs) {
                 String response = NetUtils.getCharacterData(url);
+                if (response.contains("There is nothing")) {
+                    return characters;
+                }
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootNode = mapper.readTree(response);
                 JsonNode infoNode = rootNode.path("results");
@@ -206,6 +209,9 @@ public class Character implements ICharacter {
         List<CharacterRecord> characters = new ArrayList<>();
         try {
             String response = NetUtils.getCharacterData(currUrl);
+            if (response.contains("There is nothing")) {
+                return characters;
+            }
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(response);
             JsonNode infoNode = rootNode.path("results");
