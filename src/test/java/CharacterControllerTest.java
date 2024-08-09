@@ -12,6 +12,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A test class to test the methods in the CharacterController class.
+ * Many getter and setter methods from the model layer that the controller accesses to minimize interaction
+ * between the model and the view layers are tested in the model test classes.
+ */
 class CharacterControllerTest {
 
     /** A controller for testing. */
@@ -19,20 +24,28 @@ class CharacterControllerTest {
     /** A model for testing. */
     private Character characterModel;
 
+    /**
+     * Sets up instantiation of model and controller for testing.
+     */
     @BeforeEach
     void setUp() {
-        // Create a concrete instance of the Character model
         characterModel = new Character();
         controller = new CharacterController(characterModel);
     }
 
+    /**
+     * Test that the view is set up. We can assume that the view is set correctly
+     * if no exceptions are thrown.
+     */
     @Test
     void testSetView() {
         JFrameView view = new JFrameView(controller);
         controller.setView(view);
-        // We can assume that the view is set correctly if no exceptions are thrown
     }
 
+    /**
+     * Test writing of characters out to JSON, CSV, and XML formats.
+     */
     @Test
     void testWriteCharacters() {
         List<CharacterRecord> characters = new ArrayList<>();
@@ -64,6 +77,9 @@ class CharacterControllerTest {
         assertTrue(outputXml.contains("<name>Fido</name>"));
     }
 
+    /**
+     * Test loadCharacters method.
+     */
     @Test
     void testLoadCharacters() {
         // Assuming the character model has some characters loaded for the test
@@ -74,6 +90,9 @@ class CharacterControllerTest {
         assertEquals("Baby Rick", loadedCharacters.get(0).name());
     }
 
+    /**
+     * Test getCharacterRecords method.
+     */
     @Test
     void testGetCharacterRecords() {
         List<CharacterRecord> characterRecords = controller.getCharacterRecords();
@@ -82,6 +101,9 @@ class CharacterControllerTest {
         assertTrue(characterRecords.isEmpty());
     }
 
+    /**
+     * Test that the txtPrint method prints correctly.
+     */
     @Test
     void testTxtPrint() {
         CharacterRecord record = new CharacterRecord(397, "Fido", "Alive",
@@ -93,6 +115,9 @@ class CharacterControllerTest {
         assertTrue(result.contains("Gender: Male"));
     }
 
+    /**
+     * Test getter method for the model works correctly.
+     */
     @Test
     void testGetModel() {
         Character model = controller.getModel();

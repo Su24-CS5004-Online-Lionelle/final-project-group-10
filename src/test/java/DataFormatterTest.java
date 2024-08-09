@@ -15,9 +15,12 @@ import java.util.List;
  * Contains tests that verify the functionality of formatting data into 
  * different formats, such as text, XML, and CSV 
  * based on a list of CharacterRecords.
+ * 
+ * This class inherently tests the DomainXMLWrapper class.
  */
 public class DataFormatterTest {
 
+    /** List of CharacterRecords to use for testing. */
     private List<CharacterRecord> characters;
 
     /**
@@ -47,6 +50,7 @@ public class DataFormatterTest {
 
     /**
      * Tests the writeXmlData method.
+     * Inherently tests DomainXMLWrapper.
      */
     @Test
     public void testWriteXmlData() {
