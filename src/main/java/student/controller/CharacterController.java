@@ -23,6 +23,7 @@ public class CharacterController {
 
     /**
      * Set the view for the controller.
+     *
      * @param view the JFrameView to set.
      */
     public void setView(JFrameView view) {
@@ -31,7 +32,7 @@ public class CharacterController {
 
     /**
      * Constructor for the CharacterController.
-     * 
+     *
      * @param character the character model.
      */
     public CharacterController(ICharacter character) {
@@ -44,12 +45,12 @@ public class CharacterController {
     /**
      * Write the characters to the output stream in the specified format.
      *
-     * @param characters the list of characters to write.
+     * @param characters    the list of characters to write.
      * @param fileExtension the file extension.
-     * @param out the output stream to write to.
+     * @param out           the output stream to write to.
+     * @Nonnull Formats format, OutputStream out)
      * @see DataFormatter#write(@Nonnull Collection<ICharacter.CharacterRecord> characters,
-     *                                     @Nonnull Formats format, OutputStream out)
-     */    
+     */
     public void writeCharacters(List<ICharacter.CharacterRecord> characters, String fileExtension, OutputStream out) {
         Formats format;
         switch (fileExtension) {
@@ -106,7 +107,6 @@ public class CharacterController {
      */
     public List<ICharacter.CharacterRecord> loadCharacters(String name, String status, String species, String gender,
                                                            boolean ascending) {
-        character.loadURL(name, status, species, gender, ascending);
         return character.loadCharacters(name, status, species, gender, ascending);
     }
 
@@ -145,6 +145,7 @@ public class CharacterController {
 
     /**
      * Get the model component (which is the character class).
+     *
      * @return the character instance
      */
     public Character getModel() {
