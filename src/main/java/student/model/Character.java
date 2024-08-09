@@ -108,6 +108,7 @@ public class Character implements ICharacter {
     public List<CharacterRecord> loadCharacters(String name, String status, String species, String gender,
                                                 boolean ascending) {
         try {
+            loadURL(name, status, species, gender, ascending);
             List<CharacterRecord> characters = new ArrayList<>();
             for (String url : this.selectedURLs) {
                 String response = NetUtils.getCharacterData(url);
