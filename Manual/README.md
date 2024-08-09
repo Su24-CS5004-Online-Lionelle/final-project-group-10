@@ -43,6 +43,9 @@ IMAGE HERE
 
 If there are no characters that match the search criteria, the user will get this message displayed to the screen. 
 
+> [!WARNING]
+> The results may take a little while to load onto the display area. Each button click will queue another task - this program will work best if the user allows each click to return a result first.
+
 ### Exporting Search Results
 
 The user can export the search results out to a file in XML, JSON, or CSV format. Please note that the API link must be generated first by clicking the search button, and these results will be the ones saved to the new file. 
