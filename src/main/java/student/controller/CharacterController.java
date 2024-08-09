@@ -67,6 +67,15 @@ public class CharacterController {
         DataFormatter.write(characters, format, out);
     }
 
+    /**
+     * Loads character data from a URL based on specified filters.
+     *
+     * @param name      the name of the character to filter by
+     * @param status    the status of the character (e.g., alive, dead, unknown)
+     * @param species   the species of the character
+     * @param gender    the gender of the character
+     * @param ascending whether the list should be sorted in ascending order
+     */
     public void loadURL(String name, String status, String species, String gender, boolean ascending) {
         try {
             character.loadURL(name, status, species, gender, ascending);
@@ -75,6 +84,12 @@ public class CharacterController {
         }
     }
 
+    /**
+     * Retrieves the URL of a character based on their page index.
+     *
+     * @param num the page of the character
+     * @return the URL as a string
+     */
     public String getURL(int num) {
         return character.getURL(num);
     }
