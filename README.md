@@ -38,15 +38,15 @@ Here are also our design documents and the GUI testing history.
 
 Required Features
 
-* GUI: Java swing/awt JFrame
-* view all items in a logical order: view all character records, page by page, with each page's results in alphabetical order. default is ascending alphabetical, but user can toggle to descending.
-* build out a list from the collection: user can search for characters and save out the search results.
-* save out the list: user is able to save out list to .xml, .json, and .csv file formats.
+* **GUI:** Java swing/awt JFrame
+* **view all items in a logical order:** view all character records, page by page, with each page's results in alphabetical order. default is ascending alphabetical, but user can toggle to descending.
+* **build out a list from the collection:** user can search for characters and save out the search results.
+* **save out the list:** user is able to save out list to .xml, .json, and .csv file formats.
 
 Additional Features
 
-* be able to search for items in the collection: user can search for characters by name. all characters whose name fields contain the name that the user searches for are included in the records.
-* sort items in the collection: sort search results by name alphabetically, ascending and descending.
-* filter items: filter search results by gender, status, and species.
-* have original item list come from an online API/online access: use the aforementioned Rick and Morty API's character schema.
-* include images for your items: search results generate an image for each character. 
+* **be able to search for items in the collection:** user can search for characters by name. all characters whose name fields contain the name that the user searches for are included in the records.
+* **sort items in the collection:** sort search results by name alphabetically, ascending and descending.
+* **filter items:** filter search results by gender, status, and species.
+* **have original item list come from an online API/online access:** use the aforementioned Rick and Morty API's character schema.
+* ** include images for your items:** search results generate an image for each character. 
