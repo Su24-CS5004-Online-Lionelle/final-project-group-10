@@ -9,8 +9,17 @@ import java.util.Collections;
 import student.model.ICharacter.CharacterRecord;
 import student.model.util.Sorter;
 
+/**
+ * Tests for the Sorter class to ensure that it correctly sorts 
+ * a list of CharacterRecords based on the character's name, 
+ * in either ascending or descending order.
+ */
 public class SorterTest {
 
+    /**
+     * Tests sorting in ascending order
+     * Verifies that a list of characters is sorted correctly in ascending order by name.
+     */
     @Test
     public void testSortAscending() {
         Sorter sorter = new Sorter();
@@ -27,6 +36,10 @@ public class SorterTest {
         assertEquals("Rick", sorted.get(2).name());
     }
 
+    /**
+     * Tests sorting in descending order
+     * Verifies that a list of characters is sorted correctly in descending order by name.
+     */
     @Test
     public void testSortDescending() {
         Sorter sorter = new Sorter();
@@ -43,6 +56,10 @@ public class SorterTest {
         assertEquals("Beth", sorted.get(2).name());
     }
 
+    /**
+     * Tests sorting with an empty list.
+     * Ensures that sorting an empty stream results in an empty list without errors.
+     */
     @Test
     public void testSortWithEmptyList() {
         Sorter sorter = new Sorter();
@@ -51,6 +68,11 @@ public class SorterTest {
         assertTrue(sorted.isEmpty());
     }
 
+    /**
+     * Tests sorting with a single element in the list.
+     * Confirms that sorting a list with only one character does not alter the list 
+     * and returns the single character.
+     */
     @Test
     public void testSortWithSingleElement() {
         Sorter sorter = new Sorter();
@@ -61,6 +83,11 @@ public class SorterTest {
         assertEquals("Jerry", sorted.get(0).name());
     }
 
+    /**
+     * Tests the stability of sorting.
+     * Ensures that sorting maintains the order of records 
+     * that have identical sort keys, in this case, names.
+     */
     @Test
     public void testSortStability() {
         Sorter sorter = new Sorter();
